@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    
+    Duke&#39;s Blog</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-js" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+  <div class="article-inner">
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/12/22/js/" class="article-date">
+  <time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished">2018-12-22</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h3 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">DOM - Document object model  文档对象模型</span><br><span class="line">获取子节点:</span><br><span class="line">	children 获取全部子节点</span><br><span class="line">	childrenNode 获取子节点和内容</span><br><span class="line">返回父节点: </span><br><span class="line">	parentNode()</span><br><span class="line">添加子节点: </span><br><span class="line">	appendChild() 和 insertBefore()</span><br><span class="line">删除节点: </span><br><span class="line">	remove(): 删除自己 </span><br><span class="line">	removeChild(): 删除指定子标签</span><br><span class="line">克隆节点:</span><br><span class="line">	cloneNode : 克隆节点</span><br><span class="line">替换节点 :</span><br><span class="line">	父节点.replaceChild(新节点,旧节点)</span><br></pre></td></tr></table></figure>
+<h3 id="BOM的三种弹窗"><a href="#BOM的三种弹窗" class="headerlink" title="BOM的三种弹窗"></a>BOM的三种弹窗</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">alert(内容) :</span><br><span class="line"> 	弹出指定内容的警告框,确定按钮后关闭</span><br><span class="line">confirm(内容):</span><br><span class="line">	弹出内容的窗口 ,确定返回<span class="literal">true</span>,取消<span class="literal">false</span></span><br><span class="line">prompt(输入框标题,输入框默认值):</span><br><span class="line">	确认返回值为 输入框内容 ,取消则为null</span><br></pre></td></tr></table></figure>
+<h3 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">一.jQuery: 是js的一个外部库,使用之前必须要添加.</span><br><span class="line">1.jq对象都使用$(<span class="string">""</span>)来表示:</span><br><span class="line">2.对象的增 删 改 查 .</span><br><span class="line">	1.获取标签</span><br><span class="line">	$(<span class="string">''</span>) </span><br><span class="line">		<span class="comment">#A - id为A的标签</span></span><br><span class="line">		.A - class名为A的标签</span><br><span class="line">		B&gt;A - B所有子类标签为A的标签</span><br><span class="line">		B+A - 紧跟B的A标签</span><br><span class="line">		B-A - B后面的同级标签A</span><br><span class="line">						</span><br><span class="line">		:first - 第一个标签</span><br><span class="line">		:last - 最后一个标签</span><br><span class="line">	 B A:first-child - B标签里的第一个A标签</span><br><span class="line">		:gt(n) 第n个后面的标签</span><br><span class="line">			 </span><br><span class="line">	2.添加标签	 </span><br><span class="line">		父标签.append(子标签)</span><br><span class="line">				添加子标签 添加到父标签最后</span><br><span class="line">		父标签.prepend(子标签)</span><br><span class="line">				添加子标签 添加到父标签最前面</span><br><span class="line">		标签1.before(标签2)</span><br><span class="line">				添加标签2在标签1之前</span><br><span class="line">		标签1.after(标签2)</span><br><span class="line">				添加标签2在标签1之后</span><br><span class="line">					</span><br><span class="line">					</span><br><span class="line">	3.删除标签</span><br><span class="line">		标签1.empty()</span><br><span class="line">				清空标签1中所有的子标签</span><br><span class="line">		标签1.remove()</span><br><span class="line">				删除所有的标签1</span><br><span class="line">					</span><br><span class="line">					</span><br><span class="line">	4.拷贝和替换:</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">	5.属性和样式:</span><br><span class="line">			标签.attr(属性名)  - 获取属性值(只获取被选中标签中的第一个标签)</span><br><span class="line">				</span><br><span class="line">			标签.attr(属性名,值) - 修改/添加(会修改添加所有的标签)</span><br><span class="line">				</span><br><span class="line">	6.标签内容属性:</span><br><span class="line">			注意:不传参就是获取值, 传参就是改变值</span><br><span class="line">			标签.text() - 标签内容的文本部分</span><br><span class="line">			标签.html() - 标签所有内容</span><br><span class="line">			标签.val() - 单标签的value属性</span><br><span class="line">			</span><br><span class="line">	7.class属性</span><br><span class="line">			.addClass() 添加class属性值</span><br><span class="line">			.removeClass() 删除指定的class属性值</span><br><span class="line">			多个class值用空格隔开</span><br><span class="line">			</span><br><span class="line">	8.样式属性</span><br><span class="line">			 标签.css(样式属性名) - 获取样式属性值</span><br><span class="line">			 </span><br><span class="line">			 标签.css(样式属性名,值)</span><br><span class="line">			</span><br><span class="line">			标签.css(&#123;</span><br><span class="line">				<span class="string">'属性名'</span>: <span class="string">'值'</span>,</span><br><span class="line">				<span class="string">'属性名1'</span> : <span class="string">'值1'</span></span><br><span class="line">			&#125;)</span><br><span class="line">			</span><br><span class="line">	9.事件</span><br><span class="line">			a.标签.on(事件名,回调函数) - 给标签绑定指定的事件 事件名不需要on</span><br><span class="line">			b.标签.on(事件名,选择器,回调函数)) </span><br><span class="line">			选择器 - 前面标签的后代标签(子标签/子标签的子标签)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/22/js/" data-id="cjpyx5hg20004jrt64te7fq5j" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2018/12/22/html/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            HTML学习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2018/12/21/ok/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">git远程仓库 ssh秘钥 服务器问题</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2018 Duke&#39;s Blog</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
+      <!--
+      <li><a href="/">Duke</a></li>
+      -->
+    </ul>
+  </div>
+</footer>
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Duke&#39;s Blog"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
