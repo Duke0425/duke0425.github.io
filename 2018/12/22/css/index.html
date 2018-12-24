@@ -1,212 +1,178 @@
 <!DOCTYPE html>
-<html lang="">
-  <head><meta name="generator" content="Hexo 3.8.0">
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <title>css选择器 | Duke&#39;s Blog</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <meta name="description" content="123456789101112伪类选择器:	a:link	a:hover(鼠标悬停)	a:active(鼠标长按)	a:visited(访问一次之后)选择器:	标签选择器 p&amp;#123;&amp;#125;	id选择器  id&amp;#123;&amp;#125;	class选择器 class属性值&amp;#123;&amp;#125;	群组选择器	子类选择器	通配符 *&amp;#123;&amp;#125;">
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="css选择器 | Duke&#39;s Blog">
+    <meta name="twitter:description" content="123456789101112伪类选择器:	a:link	a:hover(鼠标悬停)	a:active(鼠标长按)	a:visited(访问一次之后)选择器:	标签选择器 p&amp;#123;&amp;#125;	id选择器  id&amp;#123;&amp;#125;	class选择器 class属性值&amp;#123;&amp;#125;	群组选择器	子类选择器	通配符 *&amp;#123;&amp;#125;">
 
-
-
-  <meta name="description" content="css选择器">
-
-
-
-
-  <meta name="keywords" content="css学习,">
-
-
-
-
-
-  <link rel="alternate" href="/default" title="Duke's Blog">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
-
-
-
-<link rel="canonical" href="http://yoursite.com/2018/12/22/css/">
-
-
-<meta name="description" content="123456789101112伪类选择器:	a:link	a:hover(鼠标悬停)	a:active(鼠标长按)	a:visited(访问一次之后)选择器:	标签选择器 p&amp;#123;&amp;#125;	id选择器  id&amp;#123;&amp;#125;	class选择器 class属性值&amp;#123;&amp;#125;	群组选择器	子类选择器	通配符 *&amp;#123;&amp;#125;">
-<meta name="keywords" content="css学习">
-<meta property="og:type" content="article">
-<meta property="og:title" content="css选择器">
-<meta property="og:url" content="http://yoursite.com/2018/12/22/css/index.html">
-<meta property="og:site_name" content="Duke&#39;s Blog">
-<meta property="og:description" content="123456789101112伪类选择器:	a:link	a:hover(鼠标悬停)	a:active(鼠标长按)	a:visited(访问一次之后)选择器:	标签选择器 p&amp;#123;&amp;#125;	id选择器  id&amp;#123;&amp;#125;	class选择器 class属性值&amp;#123;&amp;#125;	群组选择器	子类选择器	通配符 *&amp;#123;&amp;#125;">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-22T03:15:00.112Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css选择器">
-<meta name="twitter:description" content="123456789101112伪类选择器:	a:link	a:hover(鼠标悬停)	a:active(鼠标长按)	a:visited(访问一次之后)选择器:	标签选择器 p&amp;#123;&amp;#125;	id选择器  id&amp;#123;&amp;#125;	class选择器 class属性值&amp;#123;&amp;#125;	群组选择器	子类选择器	通配符 *&amp;#123;&amp;#125;">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
-
-
-
-
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: false
-    },
-  };
-</script>
-
-
-
-
-  
-
-
-
-    <title> css选择器 - Duke's Blog </title>
-  </head>
-
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Duke's Blog</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    <li class="menu-item">
-                        <a href="/archives">
-                            
-                            
-                                Archives
-                            
-                        </a>
-                    </li>
-                
-                    <li class="menu-item">
-                        <a href="/about">
-                            
-                            
-                                About
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
-</div>
-
-      </header>
-      <div id="content">
-        
-    <div id="primary">
-        
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          css选择器
-        
-      </h1>
-
-      <time class="post-time">
-          Dec 22 2018
-      </time>
-    </header>
-
-
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="css选择器 | Duke&#39;s Blog">
+    <meta property="og:description" content="123456789101112伪类选择器:	a:link	a:hover(鼠标悬停)	a:active(鼠标长按)	a:visited(访问一次之后)选择器:	标签选择器 p&amp;#123;&amp;#125;	id选择器  id&amp;#123;&amp;#125;	class选择器 class属性值&amp;#123;&amp;#125;	群组选择器	子类选择器	通配符 *&amp;#123;&amp;#125;">
 
     
-            <div class="post-content">
-            <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">伪类选择器:</span><br><span class="line">	a:link</span><br><span class="line">	a:hover(鼠标悬停)</span><br><span class="line">	a:active(鼠标长按)</span><br><span class="line">	a:visited(访问一次之后)</span><br><span class="line">选择器:</span><br><span class="line">	标签选择器 p&#123;&#125;</span><br><span class="line">	id选择器  id&#123;&#125;</span><br><span class="line">	class选择器 class属性值&#123;&#125;</span><br><span class="line">	群组选择器</span><br><span class="line">	子类选择器</span><br><span class="line">	通配符 *&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-            </div>
-          
+    <meta name="author" content="Duke">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
     
-      <footer class="post-footer">
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/css学习/">css学习</a>
-		  
-		</div>
-		
+    <link rel="icon" href="/images/favicon.png">
+    
 
-        
-        
-  <nav class="post-nav">
+    <meta name="generator" content="hexo"/>
     
+    <link rel="alternate" type="application/rss+xml" title="Duke&#39;s Blog" href="/atom.xml">
     
-      <a class="next" href="/2018/12/22/display/">
-        <span class="next-text nav-default">css属性</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
 
-        
-  <div class="comments" id="comments">
-    
-  </div>
+    <link rel="canonical" href="http://yoursite.com/2018/12/22/css/"/>
 
-
-      </footer>
     
-  </article>
+</head>
 
-    </div>
+<body class="home-template no-js">
 
-      </div>
-
-      <footer id="colophon"><span class="copyright-year">
-    
-        &copy;
-    
-        2014 -
-    
-    2018
-    <span class="footer-author">Duke.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
     </span>
-</span>
 
-      </footer>
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
 
-      <div class="back-to-top" id="back-to-top">
-        <i class="iconfont icon-up"></i>
+        <a href="/" title="前往 Duke&#39;s Blog 的主页"><img src="/images/logo2.jpg" width="80" alt="Duke&#39;s Blog logo" class="panel-cover__logo logo"></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Duke&#39;s Blog">Duke&#39;s Blog</a></h1>
+        
+        <hr class="panel-cover__divider">
+        <p class="panel-cover__description"></p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary">
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/lenbo-ma" title="查看我的GitHub主页" target="_blank">
+      <i class="social fa fa-github"></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  <li class="navigation__item">
+    <a href="https://twitter.com/lenbo_" title="上Twitter找我" target="_blank">
+      <i class="social fa fa-twitter"></i>
+      <span class="label">Twitter</span>
+    </a>
+  </li>
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class="social fa fa-rss"></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
       </div>
+
     </div>
-    
+
+    <div class="panel-cover--overlay cover-blue"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-12-21T16:00:00.000Z" class="post-list__meta--date date">2018-12-22</time> &#8226; <span class="post-meta__tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/css学习/">css学习</a>
+</span>
+    </div>
+    <h1 class="post-title">css选择器</h1>
+  </header>
+
+  <section class="post">
+    <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">伪类选择器:</span><br><span class="line">	a:link</span><br><span class="line">	a:hover(鼠标悬停)</span><br><span class="line">	a:active(鼠标长按)</span><br><span class="line">	a:visited(访问一次之后)</span><br><span class="line">选择器:</span><br><span class="line">	标签选择器 p&#123;&#125;</span><br><span class="line">	id选择器  id&#123;&#125;</span><br><span class="line">	class选择器 class属性值&#123;&#125;</span><br><span class="line">	群组选择器</span><br><span class="line">	子类选择器</span><br><span class="line">	通配符 *&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+  </section>
+
+</article>
 
 
-    
 
+            <footer class="footer">
+    <span class="footer__copyright">
+        本站点采用<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </span>
+    <span class="footer__copyright">
+        基于 <a href="http://hexo.io">Hexo</a> 搭建，感谢 <a href="https://pages.github.com/">GitHub Pages</a> 提供免费的托管服务
+    </span>
+    <span class="footer__copyright">
+        &copy; 2018 - 本站由 <a href="/">@Longbo Ma</a> 创建,
+        使用<a href="https://github.com/lenbo-ma/hexo-theme-vno">hexo-theme-vno</a>主题,
+        修改自<a href="http://github.com/onevcat/vno" target="_blank">Vno</a>
+    </span>
+</footer>
 
+        </div>
+    </div>
 
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
 
-  
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
-  
-
-  
-
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
-
-  </body>
+     
+</body>
 </html>
