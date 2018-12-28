@@ -54,6 +54,68 @@
 
     
       
+        <article id="post-redis2" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2018/12/28/redis2/">redis 多种数据指令</a>
+    </h2>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/12/28/redis2/" class="article-date">
+  <time datetime="2018-12-27T16:00:00.000Z" itemprop="datePublished">2018-12-28</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h3 id="redis-多种数据类型指令"><a href="#redis-多种数据类型指令" class="headerlink" title="redis 多种数据类型指令"></a>redis 多种数据类型指令</h3><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表:"></a>哈希表:</h3><p>hset        : 设置单个字段<br>hmset       : 设置多个字段<br>hgetall        : 获取全部字段和对应的值<br>hget        : 获取字段和字段对应的值<br>hmget       : 获取多个字段<br>hdel        : 删除哈希表的字段</p>
+<p>hkeys :查看全部字段<br>hvals :查看全部字段对应的值</p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表:"></a>列表:</h3><p>(redis的列表可以实现两种经典的数据结构)<br><em><br>经典数据存储结构:<br>栈(stack) - FILO - 先进后出 lpush+lpop/ rpush+rpop<br>队列(queue) - FIFO - 先进先出 lpush+rpop/ rpush+lpop
+</em></p>
+<p>lpush        : 从列表左边插入值<br>rpush        : 从列表右边插入值<br>lrange list start stop : 取出列表起始下标 - 停止下标的值<br>lpop         : 从列表左边取值<br>rpop         : 从列表右边取值</p>
+<p>lindex       : 获取对应的下标的值<br>llen         : 获取列表元素个数<br>brpop        :+等待时间</p>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合:"></a>集合:</h3><p>sadd         :添加元素<br>smembers     :查看列表的元素<br>srem         :移出列表中的指定元素<br>sismember    :查看元素是否存在于集合1<br>scard        :查看所有的元素</p>
+<p>sinter       :交集<br>sunion       :补集<br>sdiff        :差集<br>spop         :取元素并删除元素<br>sranmmember  :随机从列表取出指定个数的元素</p>
+<h3 id="有序集合"><a href="#有序集合" class="headerlink" title="有序集合"></a>有序集合</h3><p>zadd         :添加元素 必须添加元素的score<br>zrange       :从小到大按照score来排列元素<br>zrevrange    :从大到小按照score来排列元素</p>
+<p>======================================</p>
+<h3 id="奴隶机器和主人机器设置"><a href="#奴隶机器和主人机器设置" class="headerlink" title="奴隶机器和主人机器设置"></a>奴隶机器和主人机器设置</h3><p>主人:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server --requirepass 123123 &gt; redis.log 2&gt; redis-error.log &amp; 创建redis - master</span><br></pre></td></tr></table></figure></p>
+<p>奴隶:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server --slaveof 120.79.219.2  6379 &gt; redis.log 2&gt;redis-error.log &amp; 创建redis - slave</span><br></pre></td></tr></table></figure></p>
+<p>netstat -nap | grep 6379 查看网络端口<br>ps -ef | grep redis 查看redis服务</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/28/redis2/" data-id="cjq818aju0004lut6maawdm5v" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
         <article id="post-redis" class="article article-type-post" itemscope="" itemprop="blogPost">
 
   <div class="article-inner">
@@ -102,59 +164,9 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/27/redis/" data-id="cjq6m74x10005p1t6sy7m7r2z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/27/redis/" data-id="cjq818ajt0003lut66v3nxdgx" class="article-share-link">Share</a>
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-css" class="article article-type-post" itemscope="" itemprop="blogPost">
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/12/22/css/">css选择器</a>
-    </h2>
-  
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/12/22/css/" class="article-date">
-  <time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished">2018-12-22</time>
-</a>
-        
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">伪类选择器:</span><br><span class="line">	a:link</span><br><span class="line">	a:hover(鼠标悬停)</span><br><span class="line">	a:active(鼠标长按)</span><br><span class="line">	a:visited(访问一次之后)</span><br><span class="line">选择器:</span><br><span class="line">	标签选择器 p&#123;&#125;</span><br><span class="line">	id选择器  id&#123;&#125;</span><br><span class="line">	class选择器 class属性值&#123;&#125;</span><br><span class="line">	群组选择器</span><br><span class="line">	子类选择器</span><br><span class="line">	通配符 *&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/22/css/" data-id="cjq6m74wn0000p1t6a4izxk39" class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css学习/">css学习</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
 
     </footer>
 
@@ -206,7 +218,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/22/display/" data-id="cjq6m74wt0001p1t667cjkbox" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/22/display/" data-id="cjq818ajj0000lut62n627elr" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css学习/">css学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        <article id="post-css" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2018/12/22/css/">css选择器</a>
+    </h2>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/12/22/css/" class="article-date">
+  <time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished">2018-12-22</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">伪类选择器:</span><br><span class="line">	a:link</span><br><span class="line">	a:hover(鼠标悬停)</span><br><span class="line">	a:active(鼠标长按)</span><br><span class="line">	a:visited(访问一次之后)</span><br><span class="line">选择器:</span><br><span class="line">	标签选择器 p&#123;&#125;</span><br><span class="line">	id选择器  id&#123;&#125;</span><br><span class="line">	class选择器 class属性值&#123;&#125;</span><br><span class="line">	群组选择器</span><br><span class="line">	子类选择器</span><br><span class="line">	通配符 *&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/22/css/" data-id="cjq818ajp0001lut6cyjxkg4k" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css学习/">css学习</a></li></ul>
 
@@ -257,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/22/html/" data-id="cjq6m74wy0003p1t69gm0178h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/22/html/" data-id="cjq818ajv0005lut6xf4dmicq" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML相关学习/">HTML相关学习</a></li></ul>
 
@@ -299,7 +361,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/22/js/" data-id="cjq6m74xx000ip1t6bcu69q4h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/22/js/" data-id="cjq818ak8000ilut6mlpznbyi" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 
@@ -352,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/21/ok/" data-id="cjq6m74x00004p1t6n71r18ls" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/21/ok/" data-id="cjq818aka000jlut6bftg9tpw" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
@@ -403,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/21/web/" data-id="cjq6m74x50008p1t6kkb237g8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/21/web/" data-id="cjq818ajy0008lut6nt1nwact" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/我的个人网站/">我的个人网站</a></li></ul>
 

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    redis 多种数据指令 |
+    
+    Duke&#39;s Blog</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-redis2" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      redis 多种数据指令
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/12/28/redis2/" class="article-date">
+  <time datetime="2018-12-27T16:00:00.000Z" itemprop="datePublished">2018-12-28</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h3 id="redis-多种数据类型指令"><a href="#redis-多种数据类型指令" class="headerlink" title="redis 多种数据类型指令"></a>redis 多种数据类型指令</h3><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表:"></a>哈希表:</h3><p>hset        : 设置单个字段<br>hmset       : 设置多个字段<br>hgetall        : 获取全部字段和对应的值<br>hget        : 获取字段和字段对应的值<br>hmget       : 获取多个字段<br>hdel        : 删除哈希表的字段</p>
+<p>hkeys :查看全部字段<br>hvals :查看全部字段对应的值</p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表:"></a>列表:</h3><p>(redis的列表可以实现两种经典的数据结构)<br><em><br>经典数据存储结构:<br>栈(stack) - FILO - 先进后出 lpush+lpop/ rpush+rpop<br>队列(queue) - FIFO - 先进先出 lpush+rpop/ rpush+lpop
+</em></p>
+<p>lpush        : 从列表左边插入值<br>rpush        : 从列表右边插入值<br>lrange list start stop : 取出列表起始下标 - 停止下标的值<br>lpop         : 从列表左边取值<br>rpop         : 从列表右边取值</p>
+<p>lindex       : 获取对应的下标的值<br>llen         : 获取列表元素个数<br>brpop        :+等待时间</p>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合:"></a>集合:</h3><p>sadd         :添加元素<br>smembers     :查看列表的元素<br>srem         :移出列表中的指定元素<br>sismember    :查看元素是否存在于集合1<br>scard        :查看所有的元素</p>
+<p>sinter       :交集<br>sunion       :补集<br>sdiff        :差集<br>spop         :取元素并删除元素<br>sranmmember  :随机从列表取出指定个数的元素</p>
+<h3 id="有序集合"><a href="#有序集合" class="headerlink" title="有序集合"></a>有序集合</h3><p>zadd         :添加元素 必须添加元素的score<br>zrange       :从小到大按照score来排列元素<br>zrevrange    :从大到小按照score来排列元素</p>
+<p>======================================</p>
+<h3 id="奴隶机器和主人机器设置"><a href="#奴隶机器和主人机器设置" class="headerlink" title="奴隶机器和主人机器设置"></a>奴隶机器和主人机器设置</h3><p>主人:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server --requirepass 123123 &gt; redis.log 2&gt; redis-error.log &amp; 创建redis - master</span><br></pre></td></tr></table></figure></p>
+<p>奴隶:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server --slaveof 120.79.219.2  6379 &gt; redis.log 2&gt;redis-error.log &amp; 创建redis - slave</span><br></pre></td></tr></table></figure></p>
+<p>netstat -nap | grep 6379 查看网络端口<br>ps -ef | grep redis 查看redis服务</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/28/redis2/" data-id="cjq818aju0004lut6maawdm5v" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2018/12/27/redis/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">Redis基础</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2018 Duke&#39;s Blog</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
+      <!--
+      <li><a href="/">Duke</a></li>
+      -->
+    </ul>
+  </div>
+</footer>
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Duke&#39;s Blog"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">Gallery</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
