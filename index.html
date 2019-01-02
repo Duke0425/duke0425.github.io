@@ -54,6 +54,160 @@
 
     
       
+        <article id="post-Django基础配置(一)" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/01/02/Django基础配置(一)/">Django基础配置(一)</a>
+    </h2>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/01/02/Django基础配置(一)/" class="article-date">
+  <time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished">2019-01-02</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h1 id="Django基础配置-一"><a href="#Django基础配置-一" class="headerlink" title="Django基础配置(一)"></a>Django基础配置(一)</h1><p>创建一个写内容的项目,取名为<br>python manage.py startapp app </p>
+<p><strong>MVT:</strong></p>
+<ol>
+<li>M: models.py,模型层:</li>
+<li>V: views.py, 写业务逻辑的地方</li>
+<li>T: templates,模板,定义页面</li>
+</ol>
+<p>注意: MVT模式是由MVC模式演变出来的.</p>
+<p>MVC模式是所有框架遵循的模式.</p>
+<p><strong>MVC:</strong></p>
+<ol>
+<li>M: 模型层 </li>
+<li>V: 模板,html页面</li>
+<li>C: 业务逻辑层 – controller 写业务逻辑的地方</li>
+</ol>
+<p><strong>一.settings.py中配置</strong></p>
+<pre><code>DATABASES = {
+&apos;default&apos;: {
+&apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
+&apos;NAME&apos;: &apos;dj8&apos;,
+&apos;USER&apos;: &apos;root&apos;,
+&apos;PASSWORD&apos;: &apos;123456&apos;,
+&apos;HOST&apos;: &apos;127.0.0.1&apos;,
+&apos;PORT&apos;: 3306
+}
+}
+</code></pre><p>如果出错,在DATABASE中添加’OPTIONS’:{‘isolation_level’:None}</p>
+<p><strong>二.安装pymysql</strong></p>
+<pre><code>在工程目录的__init__.py文件中 定义 pymysql.install_as_MySQLdb
+</code></pre><p><strong>三.迁移和插入管理员账号</strong></p>
+<pre><code>1. python manage.py migrate 迁移
+2. python manage.py createsuperuser 插入管理员账号
+</code></pre><p><strong>四.如果在model.py中添加了表之后进行迁移</strong></p>
+<pre><code>1. 生成迁移文件 python manage.py makemigrations
+2. 迁移 python manage.py migrate
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/02/Django基础配置(一)/" data-id="cjqey83w30000ikt6zhss7ok0" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/">Django</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        <article id="post-虚拟环境安装+创建py项目" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+  <div class="article-inner">
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/01/02/虚拟环境安装+创建py项目/" class="article-date">
+  <time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished">2019-01-02</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h1 id="一-虚拟环境安装"><a href="#一-虚拟环境安装" class="headerlink" title="一.虚拟环境安装"></a><em>一.虚拟环境安装</em></h1><p> <strong>第一步(安装virtualenv):</strong> </p>
+<p>打开命令提示符(cmd)</p>
+<pre><code>pip install virtualenv /安装虚拟环境(pip install  --user virtualenv)
+</code></pre><p> <strong>第二步(创建虚拟环境):</strong><br>指定文件夹下:</p>
+<pre><code>pip virtualenv --no-site-packages -p C:\Program Files\Python37\python.exe djenv8 
+</code></pre><blockquote>
+<p>代码注解:<br>创建虚拟环境文件(–no-site-packages: 表示创建的虚拟环境是纯净的环境,不安装有其他的库)(-p : 表示虚拟环境中的环境参数+虚拟环境名字)</p>
+</blockquote>
+<p><strong>第三步 查看当前安装的库和库的版本</strong></p>
+<p><code>pip list</code> </p>
+<h1 id="二-创建py项目"><a href="#二-创建py项目" class="headerlink" title="二.创建py项目"></a>二.创建py项目</h1><p><strong>第一步(激活环境)</strong></p>
+<p>进入到先前创建虚拟环境的文件下,进入到scripts文件下,执行指令activate.即可激活环境.</p>
+<pre><code>windows: cd djenv8/Scripts 执行activate/ 用于激活环境  ---- (环境名)+路径 :表示成功激活
+
+Mac/Linux/Ubuntu : 直接执行source activate命令
+
+deactivate/退出虚拟环境
+</code></pre><p>注意:激活activate后路径前面会括号,括号中有虚拟环境名</p>
+<p><img src="https://i.imgur.com/vNlACNx.jpg" alt=""></p>
+<p><strong>第二步(创建py)</strong></p>
+<p>在cmd中回到需要创建py项目的文件夹中,我的文件夹是在e盘下的workspace文件下.</p>
+<pre><code>django-admin startproject day01 / 创建py项目
+</code></pre><p><img src="https://i.imgur.com/jsX3FRT.png" alt=""></p>
+<p>使用pycharm打开创建的项目</p>
+<p>在pycharm/setting/project/project interpreter中 右边齿轮点击add .</p>
+<p>选择Existing environment ,添加先前创建在指定文件e:/env/djenv8 虚拟环境.ok退出,apply 使其生效即可.</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动:"></a><strong>启动:</strong></h2><p><strong>打开Terminal:</strong></p>
+<p>启动指令: python manage.py runserver. 默认ip为127.0.0.1 默认端口是8000</p>
+<p>修改启动端口 : python manage.py runserver 端口号</p>
+<p>修改ip和端口: python manage.py runserver ip:端口号</p>
+<p>ip参数:如果为0.0.0.0表示任何人都可以通过公网ip访问Django项目(80端口,隐藏)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/01/02/虚拟环境安装+创建py项目/" data-id="cjqey83wy000fikt6h8vbxmbh" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/">Django</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
         <article id="post-redis2" class="article article-type-post" itemscope="" itemprop="blogPost">
 
   <div class="article-inner">
@@ -99,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/28/redis2/" data-id="cjq818aju0004lut6maawdm5v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/28/redis2/" data-id="cjqey83wu000bikt67g7xdvhf" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
 
@@ -164,9 +318,59 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/27/redis/" data-id="cjq818ajt0003lut66v3nxdgx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/27/redis/" data-id="cjqey83wo0009ikt6uoirmge8" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        <article id="post-css" class="article article-type-post" itemscope="" itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2018/12/22/css/">css选择器</a>
+    </h2>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/12/22/css/" class="article-date">
+  <time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished">2018-12-22</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">伪类选择器:</span><br><span class="line">	a:link</span><br><span class="line">	a:hover(鼠标悬停)</span><br><span class="line">	a:active(鼠标长按)</span><br><span class="line">	a:visited(访问一次之后)</span><br><span class="line">选择器:</span><br><span class="line">	标签选择器 p&#123;&#125;</span><br><span class="line">	id选择器  id&#123;&#125;</span><br><span class="line">	class选择器 class属性值&#123;&#125;</span><br><span class="line">	群组选择器</span><br><span class="line">	子类选择器</span><br><span class="line">	通配符 *&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/22/css/" data-id="cjqey83w90001ikt6cl5bordm" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css学习/">css学习</a></li></ul>
 
     </footer>
 
@@ -218,57 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/22/display/" data-id="cjq818ajj0000lut62n627elr" class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css学习/">css学习</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-css" class="article article-type-post" itemscope="" itemprop="blogPost">
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/12/22/css/">css选择器</a>
-    </h2>
-  
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/12/22/css/" class="article-date">
-  <time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished">2018-12-22</time>
-</a>
-        
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">伪类选择器:</span><br><span class="line">	a:link</span><br><span class="line">	a:hover(鼠标悬停)</span><br><span class="line">	a:active(鼠标长按)</span><br><span class="line">	a:visited(访问一次之后)</span><br><span class="line">选择器:</span><br><span class="line">	标签选择器 p&#123;&#125;</span><br><span class="line">	id选择器  id&#123;&#125;</span><br><span class="line">	class选择器 class属性值&#123;&#125;</span><br><span class="line">	群组选择器</span><br><span class="line">	子类选择器</span><br><span class="line">	通配符 *&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/22/css/" data-id="cjq818ajp0001lut6cyjxkg4k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/22/display/" data-id="cjqey83wf0003ikt6s1gsyuxv" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css学习/">css学习</a></li></ul>
 
@@ -319,7 +473,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/22/html/" data-id="cjq818ajv0005lut6xf4dmicq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/22/html/" data-id="cjqey83wh0004ikt6kk23xjgi" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML相关学习/">HTML相关学习</a></li></ul>
 
@@ -361,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/22/js/" data-id="cjq818ak8000ilut6mlpznbyi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/22/js/" data-id="cjqey83wj0005ikt6vgx2ema1" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 
@@ -414,7 +568,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/21/ok/" data-id="cjq818aka000jlut6bftg9tpw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/21/ok/" data-id="cjqey83wl0008ikt69wzo3dg0" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
@@ -465,7 +619,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/21/web/" data-id="cjq818ajy0008lut6nt1nwact" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/21/web/" data-id="cjqey83ww000dikt65atryvm4" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/我的个人网站/">我的个人网站</a></li></ul>
 
@@ -492,7 +646,7 @@
   
   <div class="outer">
     <ul class="list-inline">
-      <li>&copy; 2018 Duke&#39;s Blog</li>
+      <li>&copy; 2019 Duke&#39;s Blog</li>
       <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
       <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
       <!--
