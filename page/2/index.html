@@ -152,6 +152,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ok" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/21/ok/">git远程仓库 ssh秘钥 服务器问题</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/21/ok/" class="archive-article-date">
+  	<time datetime="2018-12-21T02:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="主体"><a href="#主体" class="headerlink" title="主体"></a>主体</h3><p>关联方法1:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;url&gt; 关联远程仓库</span><br></pre></td></tr></table></figure></p>
+<p>关联方法2:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 地址 关联远程仓库(只需关联一次)</span><br><span class="line">git push  -u origin master 第一次推送消息 </span><br><span class="line">git push 后面只用push.</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">拉取远程库的信息: </span><br><span class="line">	git pull</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">生成SSH  秘钥:</span><br><span class="line">	ssh-keygen</span><br><span class="line">连接虚拟器: </span><br><span class="line">	ssh root@虚拟机公共ip</span><br><span class="line">在本地传递文件到虚拟机上:</span><br><span class="line">	$ scp hah.rar root@120.79.219.2:/home/duke/temp.zip</span><br><span class="line">启动nginx :</span><br><span class="line">	systemctl restart nginx</span><br><span class="line">解压文件指令:</span><br><span class="line">	</span><br><span class="line">	tar -xvf file.tar //解压 tar包</span><br><span class="line"></span><br><span class="line">	tar zxvf  MY_NAME.tar.gz 解压.tar.gz文件在当前目录</span><br><span class="line">	</span><br><span class="line">	tar zxvf  MY_NAME.tgz 解压.tgz文件在当前目录</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/21/ok/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-web" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
