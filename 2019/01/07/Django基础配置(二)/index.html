@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Django的增删改查 | Duke&#39;s Blog</title>
+  <title>Django 基础配置 | Duke&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ORM (objects relationship mapping): 对象关系映射 Django的增删改查:增加数据:插入数据第一种方法:Student.objects.create(s_name=&amp;apos;duke&amp;apos;)  插入数据的第二种方法:stu = Student()   stu.s_name = &amp;apos;马儒&amp;apos; stu.s_gender = 1 stu.sav">
+  <meta name="description" content="Django 基础配置一.setting.py文件1.添加templates路径 TEMPLATES = [ {  # 添加 os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;) &amp;apos;DIRS&amp;apos;: [os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;)], }, ] 2.添加app文件 INSTALLED_A">
 <meta name="keywords" content="Django">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django的增删改查">
-<meta property="og:url" content="http://yoursite.com/2019/01/03/Django关于数据增删改查/index.html">
+<meta property="og:title" content="Django 基础配置">
+<meta property="og:url" content="http://yoursite.com/2019/01/07/Django基础配置(二)/index.html">
 <meta property="og:site_name" content="Duke&#39;s Blog">
-<meta property="og:description" content="ORM (objects relationship mapping): 对象关系映射 Django的增删改查:增加数据:插入数据第一种方法:Student.objects.create(s_name=&amp;apos;duke&amp;apos;)  插入数据的第二种方法:stu = Student()   stu.s_name = &amp;apos;马儒&amp;apos; stu.s_gender = 1 stu.sav">
+<meta property="og:description" content="Django 基础配置一.setting.py文件1.添加templates路径 TEMPLATES = [ {  # 添加 os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;) &amp;apos;DIRS&amp;apos;: [os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;)], }, ] 2.添加app文件 INSTALLED_A">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-03T11:08:20.153Z">
+<meta property="og:updated_time" content="2019-01-07T04:19:20.840Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django的增删改查">
-<meta name="twitter:description" content="ORM (objects relationship mapping): 对象关系映射 Django的增删改查:增加数据:插入数据第一种方法:Student.objects.create(s_name=&amp;apos;duke&amp;apos;)  插入数据的第二种方法:stu = Student()   stu.s_name = &amp;apos;马儒&amp;apos; stu.s_gender = 1 stu.sav">
+<meta name="twitter:title" content="Django 基础配置">
+<meta name="twitter:description" content="Django 基础配置一.setting.py文件1.添加templates路径 TEMPLATES = [ {  # 添加 os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;) &amp;apos;DIRS&amp;apos;: [os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;)], }, ] 2.添加app文件 INSTALLED_A">
   
     <link rel="alternative" href="/atom.xml" title="Duke&#39;s Blog" type="application/atom+xml">
   
@@ -155,70 +155,68 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Django关于数据增删改查" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-Django基础配置(二)" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Django的增删改查
+      Django 基础配置
     </h1>
   
 
         
-        <a href="/2019/01/03/Django关于数据增删改查/" class="archive-article-date">
-  	<time datetime="2019-01-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-03</time>
+        <a href="/2019/01/07/Django基础配置(二)/" class="archive-article-date">
+  	<time datetime="2019-01-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ORM (objects relationship mapping): 对象关系映射</p>
-<h1 id="Django的增删改查"><a href="#Django的增删改查" class="headerlink" title="Django的增删改查:"></a><strong>Django的增删改查:</strong></h1><h2 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据:"></a>增加数据:</h2><h3 id="插入数据第一种方法"><a href="#插入数据第一种方法" class="headerlink" title="插入数据第一种方法:"></a>插入数据第一种方法:</h3><pre><code>Student.objects.create(s_name=&apos;duke&apos;) 
-</code></pre><h3 id="插入数据的第二种方法"><a href="#插入数据的第二种方法" class="headerlink" title="插入数据的第二种方法:"></a>插入数据的第二种方法:</h3><pre><code>stu = Student()  
-stu.s_name = &apos;马儒&apos;
-stu.s_gender = 1
-stu.save()
-</code></pre><h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据:"></a>删除数据:</h2><pre><code>Student.objects.filter(id=1).delete()
-</code></pre><h2 id="修改-更新-数据"><a href="#修改-更新-数据" class="headerlink" title="修改(更新)数据:"></a>修改(更新)数据:</h2><pre><code>save()方法:模型对象.save()
-update()方法,模型名.objects.filter(条件).update(字段=值)
-save(方法可以改变更新时间)
-</code></pre><h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据:"></a>查询数据:</h2><h4 id="filter-方法-查询满足条件的信息-模型名-objects-filter-条件"><a href="#filter-方法-查询满足条件的信息-模型名-objects-filter-条件" class="headerlink" title="filter()方法         查询满足条件的信息:模型名.objects.filter(条件)"></a>filter()方法         查询满足条件的信息:模型名.objects.filter(条件)</h4><pre><code>stus = Student.objects.filter(s_gender=1)
-</code></pre><h4 id="all-查询所有"><a href="#all-查询所有" class="headerlink" title="all()               查询所有"></a>all()               查询所有</h4><pre><code>stus = Student.objects.all()
-</code></pre><h4 id="get-方法"><a href="#get-方法" class="headerlink" title="get()方法:"></a>get()方法:</h4><h4 id="1-get-取唯一的一个对象"><a href="#1-get-取唯一的一个对象" class="headerlink" title="1.get()取唯一的一个对象"></a>1.get()取唯一的一个对象</h4><h4 id="2-get-条件-条件必须成立"><a href="#2-get-条件-条件必须成立" class="headerlink" title="2.get(条件) 条件必须成立"></a>2.get(条件) 条件必须成立</h4><pre><code>get()取唯一的一个对象
-stu = Student.objects.get(id=2)
-</code></pre><h4 id="exclude-方法-查询出不满足条件的信息-模型名-objects-exclude-条件"><a href="#exclude-方法-查询出不满足条件的信息-模型名-objects-exclude-条件" class="headerlink" title="exclude()方法:       查询出不满足条件的信息:模型名.objects.exclude(条件)"></a>exclude()方法:       查询出不满足条件的信息:模型名.objects.exclude(条件)</h4><pre><code>stus = Student.objects.exclude(s_gender=0)
-</code></pre><h4 id="first-取第一个对象"><a href="#first-取第一个对象" class="headerlink" title="first()             取第一个对象"></a>first()             取第一个对象</h4><pre><code>stu = Student.objects.filter(s_age=20).first()
-</code></pre><h4 id="order-by-方法-排序-默认升序"><a href="#order-by-方法-排序-默认升序" class="headerlink" title="order_by()方法:     排序:默认升序 ;"></a>order_by()方法:     排序:默认升序 ;</h4><h4 id="order-by-‘-‘-降序"><a href="#order-by-‘-‘-降序" class="headerlink" title="order_by(‘-‘)       降序"></a>order_by(‘-‘)       降序</h4><pre><code>stus = Student.objects.order_by(&apos;id&apos;)
-#降序
-stus = Student.objects.order_by(&apos;-id&apos;)
-</code></pre><h4 id="values-方法-取查询对象中的字段"><a href="#values-方法-取查询对象中的字段" class="headerlink" title="values()方法:       取查询对象中的字段"></a>values()方法:       取查询对象中的字段</h4><pre><code>#取出对象中的某个字段
-stus = Student.objects.all().values(&apos;s_name&apos;,&apos;s_age&apos;)
-</code></pre><h4 id="exists-判断查询结果是否村存在-返回True或者False"><a href="#exists-判断查询结果是否村存在-返回True或者False" class="headerlink" title="exists():判断查询结果是否村存在.返回True或者False"></a>exists():判断查询结果是否村存在.返回True或者False</h4><pre><code>#判断查询结果是否存在
-a = Student.objects.filter(s_name=&apos;校长&apos;).exists()
-</code></pre><h4 id="count-计算结果的个数"><a href="#count-计算结果的个数" class="headerlink" title="count():计算结果的个数"></a>count():计算结果的个数</h4><pre><code>b = Student.objects.filter(s_gender=1).count()
-</code></pre><h4 id="pk-主键-相当于id-—pk-in-在什么范围之内"><a href="#pk-主键-相当于id-—pk-in-在什么范围之内" class="headerlink" title="pk:主键 (相当于id)—pk__in=[]:在什么范围之内"></a>pk:主键 (相当于id)—pk__in=[]:在什么范围之内</h4><pre><code>stus = Student.objects.filter(id__in=[1,2,3,4,5,6,7,8])
-print(stus)
-stus = Student.objects.filter(pk__in=[1,2,3,4,5,6,7,8])
-</code></pre><h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><h4 id="contains包含"><a href="#contains包含" class="headerlink" title="contains包含"></a>contains包含</h4><pre><code>c = Student.objects.filter(s_name__contains=&apos;小明&apos;)
-</code></pre><h4 id="startswith-以什么开头"><a href="#startswith-以什么开头" class="headerlink" title="startswith:以什么开头"></a>startswith:以什么开头</h4><h4 id="endswith-以什么结束"><a href="#endswith-以什么结束" class="headerlink" title="endswith:以什么结束"></a>endswith:以什么结束</h4><pre><code>d = Student.objects.filter(s_name__startswith=&apos;小&apos;)
-print(d.values())
+        <h2 id="Django-基础配置"><a href="#Django-基础配置" class="headerlink" title="Django 基础配置"></a>Django 基础配置</h2><h3 id="一-setting-py文件"><a href="#一-setting-py文件" class="headerlink" title="一.setting.py文件"></a>一.setting.py文件</h3><p>1.添加templates路径</p>
+<pre><code>TEMPLATES = [
+{
+ # 添加 os.path.join(BASE_DIR,&apos;templates&apos;)
+&apos;DIRS&apos;: [os.path.join(BASE_DIR,&apos;templates&apos;)],
+},
+]
+</code></pre><p>2.添加app文件</p>
+<pre><code>INSTALLED_APPS = [
+#添加&apos;app&apos;
+&apos;app&apos;
+]
+</code></pre><p>3.修改DATABASE</p>
+<pre><code>DATABASES = {
+&apos;default&apos;: {
+    &apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
+    &apos;NAME&apos;: &apos;django2&apos;,
+    &apos;HOST&apos;: &apos;127.0.0.1&apos;,
+    &apos;USER&apos;: &apos;root&apos;,
+    &apos;PASSWORD&apos;: &apos;123456&apos;,
+    &apos;PORT&apos;: 3306,
+}
+}
+</code></pre><p>4.添加 os.path.join(BASE_DIR,’static’路径</p>
+<pre><code>STATIC_URL = &apos;/static/&apos;
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,&apos;static&apos;)
+]
+</code></pre><h3 id="二-init文件"><a href="#二-init文件" class="headerlink" title="二.init文件"></a>二.<strong>init</strong>文件</h3><pre><code>import pymysql
 
-e = Student.objects.filter(s_name__endswith=&apos;明&apos;)
-</code></pre><h4 id="gt-gte-lt-lte-大于-大于等于-小于-小于等于"><a href="#gt-gte-lt-lte-大于-大于等于-小于-小于等于" class="headerlink" title="gt; gte ;lt ;lte: 大于 ;大于等于 ;小于 ;小于等于"></a>gt; gte ;lt ;lte: 大于 ;大于等于 ;小于 ;小于等于</h4><pre><code>stus = Student.objects.filter(s_age__gte=18,s_age__lte=20)
-</code></pre><h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><h4 id="from-django-db-models-import-Avg-Count-Min-Max-Sum"><a href="#from-django-db-models-import-Avg-Count-Min-Max-Sum" class="headerlink" title="from django.db.models import Avg, Count, Min, Max, Sum"></a>from django.db.models import Avg, Count, Min, Max, Sum</h4><h4 id="语法-模型名-objects-agrregate-Sum"><a href="#语法-模型名-objects-agrregate-Sum" class="headerlink" title="语法:模型名.objects.agrregate(Sum())"></a>语法:模型名.objects.agrregate(Sum())</h4><pre><code>age_avg = Student.objects.all().aggregate(Avg(&apos;s_age&apos;))
+pymysql.install_as_MySQLdb()
+</code></pre><h3 id="三-url-py文件"><a href="#三-url-py文件" class="headerlink" title="三.url.py文件"></a>三.url.py文件</h3><p>添加index使用路径:</p>
+<pre><code>from app import views
 
-age_avg = Student.objects.all().aggregate(Sum(&apos;s_age&apos;))
-</code></pre><h4 id="Q-与或非"><a href="#Q-与或非" class="headerlink" title="Q: 与或非"></a>Q: 与或非</h4><pre><code>1. 逗号隔开就是与操作,Q()之后可以使用&amp;---与
-2. Q()之后使用 &apos;|&apos;, or -----或
-3. Q()之后使用&apos;~&apos; ------非
-
-stus = Student.objects.filter(Q(s_age__gte=18)|Q(s_age__lt=20))#或
-stus = Student.objects.filter(Q(s_age__gte=18)&amp;Q(s_age__lt=20))#且
-stus = Student.objects.filter(~Q(s_age__gte=18))#取反
-</code></pre><h4 id="F"><a href="#F" class="headerlink" title="F:"></a>F:</h4><h4 id="用于比较两个字段-可使用-符号"><a href="#用于比较两个字段-可使用-符号" class="headerlink" title="用于比较两个字段,可使用+,-符号"></a>用于比较两个字段,可使用+,-符号</h4><h4 id="模型名-objects-filter-physics-gt-F-‘math’-10"><a href="#模型名-objects-filter-physics-gt-F-‘math’-10" class="headerlink" title="模型名.objects.filter(physics__gt = F(‘math’) - 10)"></a>模型名.objects.filter(physics__gt = F(‘math’) - 10)</h4><pre><code>stus = Student.objects.filter(physics__gt= F(&apos;math&apos;))
+urlpatterns = [
+    path(&apos;admin/&apos;, admin.site.urls),
+    path(&apos;index/&apos;, views.index),
+]
+</code></pre><h3 id="四-views-py"><a href="#四-views-py" class="headerlink" title="四.views.py"></a>四.views.py</h3><p>添加index 函数    </p>
+<pre><code>def index(request):
+name = &apos;duke&apos;
+return render(request, &apos;index.html&apos;,{&apos;name&apos;: name})
 </code></pre>
       
 
@@ -314,7 +312,7 @@ stus = Student.objects.filter(~Q(s_age__gte=18))#取反
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/03/Django关于数据增删改查/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/07/Django基础配置(二)/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -328,18 +326,9 @@ stus = Student.objects.filter(~Q(s_age__gte=18))#取反
   
 <nav id="article-nav">
   
-    <a href="/2019/01/07/Django基础配置(二)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Django 基础配置
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/01/02/Django基础配置(一)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Django基础配置(一)</div>
+    <a href="/2019/01/03/Django关于数据增删改查/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Django的增删改查</div>
       <i class="icon-circle-right"></i>
     </a>
   
