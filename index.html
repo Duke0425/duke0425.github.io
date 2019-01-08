@@ -152,6 +152,91 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Django配置路由分发和接收参数" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/08/Django配置路由分发和接收参数/">路由URLS</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/08/Django配置路由分发和接收参数/" class="archive-article-date">
+  	<time datetime="2019-01-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>配置路由分发:</p>
+<pre><code>path(&apos;app/&apos;, include(&apos;app.urls&apos;)),
+path(&apos;app/&apos;, include((&apos;app.urls&apos;, &apos;app&apos;)))
+</code></pre><p>接收参数: </p>
+<pre><code>- 接收整型:&lt;int:id&gt;: 其中id参数为int类型
+- 接收字符串:&lt;str: name&gt; :  其中name为str类型
+- 接收uuid:&lt;uuid: uid&gt; : 其中uid参数为uuid类型
+- 接收path: &lt;path:ph&gt; : 其中ph参数为路径
+- re_path:/index/(+d)/ :  正则匹配int整型
+- re_path(&apos;params/(\d+)/(\d+)/(\d+)&apos;): 正则接收多个参数:接收参数的顺序和路由中定义的正则顺序相同
+- re_path(&apos;params/(?P&lt;year&gt;\d+)/(?P&lt;month&gt;\d+)/(?P&lt;day&gt;\d+)&apos;: 正则接收多个参数: 接收参数的顺序和路由定义的正则顺序无关
+- path(&apos;params/&lt;int:year&gt;/&lt;int:month&gt;/&lt;int:day&gt;&apos;, views.params): 接收多个变量&quot;定义多个变量,与路由顺序无关.
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/08/Django配置路由分发和接收参数/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Django基础配置(二)" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -980,81 +1065,6 @@ deactivate/退出虚拟环境
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/12/22/display/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-html" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/22/html/">HTML学习</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/22/html/" class="archive-article-date">
-  	<time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="html标签"><a href="#html标签" class="headerlink" title="html标签"></a>html标签</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">div span标签: div是块标签 span是行内标签</span><br><span class="line">select标签:</span><br><span class="line">	下拉菜单</span><br><span class="line">	select optgroup option</span><br><span class="line">from标签:</span><br><span class="line">	action=<span class="string">"接口地址"</span> methd=<span class="string">"get/post接口方式"</span> </span><br><span class="line">input标签:</span><br><span class="line">	<span class="built_in">type</span>属性: 不同功能</span><br><span class="line">			text 文本输入框</span><br><span class="line">			password 密码输入框</span><br><span class="line">			datetime-local 时间框</span><br></pre></td></tr></table></figure>
-<h3 id="html引入css样式表三种方式"><a href="#html引入css样式表三种方式" class="headerlink" title="html引入css样式表三种方式"></a>html引入css样式表三种方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">内联样式表</span><br><span class="line">	:在标签内使用style属性改变单个标签样式</span><br><span class="line">外部样式表</span><br><span class="line">	:使用link stylesheet模式 导入外部css文件,来改变html的样式</span><br><span class="line">内部样式表</span><br><span class="line">	:style标签 改变所在html文件样式.</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">HTML相关学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/22/html/">展开全文 >></a>
         </p>
       
 
