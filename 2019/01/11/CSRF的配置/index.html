@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Duke&#39;s Blog">
 <meta property="og:description" content="1.定义路由 # 声明路由对象 router = SimpleRouter() # 定义资源 router.register(&amp;apos;student&amp;apos;, views.StuView) # 添加路由地址 urlpatterns += router.urls 2.views.py中定义 StuView类 mixins.RetrieveModelMixin: 能够通过id值查询某一个学生信">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-11T04:03:45.038Z">
+<meta property="og:updated_time" content="2019-01-11T11:05:24.350Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSRF具体使用">
 <meta name="twitter:description" content="1.定义路由 # 声明路由对象 router = SimpleRouter() # 定义资源 router.register(&amp;apos;student&amp;apos;, views.StuView) # 添加路由地址 urlpatterns += router.urls 2.views.py中定义 StuView类 mixins.RetrieveModelMixin: 能够通过id值查询某一个学生信">
@@ -206,7 +206,21 @@ urlpatterns += router.urls
     def perform_destroy(self, instance):
         instance.is_delete = 1
         instance.save()
+
+    # 重构错误提示信息
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            serializer = self.get_serializer(instance)
+            return Response(serializer.data)
+        except Exception as e:
+            return Response({&apos;code&apos;:404, &apos;msg&apos;:&apos;获取失败&apos;, &apos;data&apos;:&apos;&apos;})
+# 显示所有学生信息(此方法不是类方法)  
+def stu_list(request):
+ if request.method == &apos;GET&apos;:
+     return render(request, &apos;stu_list.html&apos;)
 </code></pre><p>3.新建serializers.py,定义StuSerializer的类</p>
+<p>(将获取的query set 进行序列化)</p>
 <pre><code>from rest_framework import serializers
 
 from app.models import Student
@@ -220,12 +234,121 @@ class Meta:
     fields = [&apos;s_name&apos;, &apos;s_gender&apos;, &apos;s_age&apos;]
 
 # 重构字段
-def to_representation(self, instance):
-    data = super(StuSerializer, self).to_representation(instance)
+    def to_representation(self, instance):
+        data = super(StuSerializer, self).to_representation(instance)
 
-    data[&apos;s_gender&apos;] = &apos;男&apos; if data[&apos;s_gender&apos;] else &apos;女&apos;
+        data[&apos;s_gender&apos;] = &apos;男&apos; if data[&apos;s_gender&apos;] else &apos;女&apos;
 
     return data
+</code></pre><p>4.新建jsonrenderer.py(重构请求成功和失败之后的返回值)</p>
+<pre><code>from rest_framework.renderers import JSONRenderer
+
+class MyJSONRenderer(JSONRenderer):
+&apos;&apos;&apos;
+    {
+        &apos;code&apos;: 200,
+        &apos;msg&apos;: &apos;请求成功&apos;,
+        &apos;data&apos;:{
+            data
+        }
+    }
+
+&apos;&apos;&apos;
+def render(self, data, accepted_media_type=None, renderer_context=None):
+    try:
+        code = data[&apos;code&apos;]
+        msg = data[&apos;msg&apos;]
+        result = data[&apos;data&apos;]
+    except:
+        code = 200,
+        msg = &apos;请求成功&apos;,
+        result = data
+
+    my_data = {
+        &apos;code&apos;: code ,
+        &apos;msg&apos;: msg,
+        &apos;data&apos;: result
+    }
+
+    return super().render(my_data, accepted_media_type,renderer_context)
+</code></pre><p>(完成以上操作,即可在POSTMAN[接口请求工具]上 使用<br>GET POST PUT PATCH DELETE) 对student表中的数据进行增删改查</p>
+<p>5.在网页中显示序列化后的学生数据</p>
+<p>   方法:AJAX异步请求 </p>
+<pre><code>&lt;script&gt;
+    $.ajax({
+        url: &apos;/user/student/&apos;,
+        type: &apos;GET&apos;,
+        datatype: &apos;json&apos;,
+        success: function(result){
+            for(var i=0; i&lt;result.data.length; i++){
+
+                var s = &apos;&lt;p&gt;姓名:&apos; + result.data[i].s_name
+                s += &apos;性别: &apos; + result.data[i].s_gender
+                s += &apos;年龄:&apos; + result.data[i].s_age
+                s +=  &apos;&lt;a onclick=&quot;del_stu(&apos; + result.data[i].id + &apos;)&quot;&gt;删除&lt;/a&gt;&apos;
+                s +=  &apos;&lt;a onclick=&quot;edit_stu(&apos; + result.data[i].id + &apos;)&quot;&gt;编辑&lt;/a&gt;&lt;/p&gt;&apos;
+                $(&apos;.stus&apos;).append(s)
+            }
+
+
+        },
+        error: function(){
+            alert(&apos;失败&apos;)
+        }
+    })
+</code></pre><p>删除学生的函数声明</p>
+<pre><code>function del_stu(id){
+    $.ajax({
+        url: &apos;/user/student/&apos;+ id + &apos;/&apos;,
+        type: &apos;DELETE&apos;,
+        dataType: &apos;json&apos;,
+        success: function(result){
+            console.log(result)
+            location.href = &apos;/user/stu_list/&apos;
+        },
+        error: function(result){
+            alert(&apos;删除失败&apos;)}
+    })
+
+}
+</code></pre><p>编辑学生的函数声明</p>
+<pre><code>function edit_stu(id){
+    $.ajax({
+        url: &apos;/user/student/&apos;+ id + &apos;/&apos;,
+        type: &apos;PATCH&apos;,
+        data: {&apos;s_name&apos;: &apos;harden&apos;},
+        dataType: &apos;json&apos;,
+        success: function(result){
+            console.log(result)
+            location.href = &apos;/user/stu_list/&apos;
+        },
+        error: function(result){
+            alert(&apos;修改失败&apos;)}
+    })
+
+}
+</code></pre><p>添加学生的函数声明</p>
+<pre><code>    function add_stu(){
+        $.ajax({
+            url: &apos;/user/student/&apos;,
+            type: &apos;POST&apos;,
+            data: {&apos;s_name&apos;: &apos;kobe&apos;},
+            dataType: &apos;json&apos;,
+            success: function(result){
+                console.log(result)
+                location.href = &apos;/user/stu_list/&apos;
+            },
+            error: function(result){
+                alert(&apos;添加失败&apos;)}
+        })
+
+    }
+
+&lt;/script&gt;
+&lt;div class=&quot;stus&quot;&gt;
+    &lt;a onclick=&quot;add_stu()&quot;&gt;添加&lt;/a&gt;
+
+&lt;/div&gt;
 </code></pre>
       
 
@@ -467,6 +590,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">css学习</a>
               </li>
              
@@ -488,10 +615,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">我的个人网站</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
             
             <div class="clearfix"></div>
