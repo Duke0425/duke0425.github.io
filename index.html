@@ -152,6 +152,130 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CSRF的配置" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/11/CSRF的配置/">CSRF具体使用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/11/CSRF的配置/" class="archive-article-date">
+  	<time datetime="2019-01-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.定义路由</p>
+<pre><code># 声明路由对象
+router = SimpleRouter()
+# 定义资源
+router.register(&apos;student&apos;, views.StuView)
+# 添加路由地址
+urlpatterns += router.urls
+</code></pre><p>2.views.py中定义 StuView类</p>
+<p>mixins.RetrieveModelMixin: 能够通过id值查询某一个学生信息</p>
+<pre><code>class StuView(viewsets.GenericViewSet,
+          mixins.ListModelMixin,
+          mixins.RetrieveModelMixin,
+          mixins.CreateModelMixin,
+          mixins.DestroyModelMixin,
+          mixins.UpdateModelMixin):
+    # 指定资源返回的内容
+    queryset = Student.objects.all()
+    # queryset = Student.objects.filter(is_delete=0)
+    # 序列化queryset的结果
+    serializer_class =  StuSerializer
+
+    # 查询所有信息,过滤到删除的内容
+    def get_queryset(self):
+        queryset = self.queryset
+
+        return queryset.filter(is_delete=0)
+
+    # 重构delete方法(软删除)
+    def perform_destroy(self, instance):
+        instance.is_delete = 1
+        instance.save()
+</code></pre><p>3.新建serializers.py,定义StuSerializer的类</p>
+<pre><code>from rest_framework import serializers
+
+from app.models import Student
+
+
+class StuSerializer(serializers.ModelSerializer):
+
+class Meta:
+    # 序列化的模型
+    model = Student
+    fields = [&apos;s_name&apos;, &apos;s_gender&apos;, &apos;s_age&apos;]
+
+# 重构字段
+def to_representation(self, instance):
+    data = super(StuSerializer, self).to_representation(instance)
+
+    data[&apos;s_gender&apos;] = &apos;男&apos; if data[&apos;s_gender&apos;] else &apos;女&apos;
+
+    return data
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/11/CSRF的配置/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-DjangoRESTFrameWork" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -994,92 +1118,6 @@ stus = Student.objects.filter(~Q(s_age__gte=18))#取反
 
 
   
-    <article id="post-Pycharm快捷键" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/02/Pycharm快捷键/">Pycharm快捷键</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/02/Pycharm快捷键/" class="archive-article-date">
-  	<time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Pycharm中常用的快捷键"><a href="#Pycharm中常用的快捷键" class="headerlink" title="Pycharm中常用的快捷键:"></a>Pycharm中常用的快捷键:</h2><ol>
-<li><strong>Ctrl+d: 复制本行内容到下一行</strong></li>
-<li><strong>Ctrl+y: 删除本行所有内容</strong></li>
-<li><strong>Ctrl+’Tab’: 切换文件</strong></li>
-<li><strong>Ctrl+e:查看最近使用的文件</strong></li>
-<li><strong>Ctrl+shift+Backsapce :导航到上次的编辑区域</strong></li>
-<li><strong>Ctrl+shift+’+/-‘:展开/折叠所有代码块</strong></li>
-<li><strong>shift+Enter:另起一行</strong></li>
-<li><strong>shift+’Tab’: 取消一次Tab制表符</strong></li>
-<li><strong>Alt+’up/down’: 跳转到上一个或下一个方法</strong></li>
-<li><strong>Alt+’right/left’: 跳转到上一个或者下一个文件</strong></li>
-<li><strong>连敲击两次’shift’,查找函数</strong></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">tools</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/02/Pycharm快捷键/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-虚拟环境安装+创建py项目" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -1285,10 +1323,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">css学习</a>
               </li>
              
@@ -1310,6 +1344,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">我的个人网站</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
               </li>
             
             <div class="clearfix"></div>

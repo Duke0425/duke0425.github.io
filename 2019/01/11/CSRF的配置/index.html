@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Django 基础配置(二) | Duke&#39;s Blog</title>
+  <title>CSRF具体使用 | Duke&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Django 基础配置(二)一.setting.py文件1.添加templates路径 TEMPLATES = [ {  # 添加 os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;) &amp;apos;DIRS&amp;apos;: [os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;)], }, ] 2.添加app文件 INSTALLE">
+  <meta name="description" content="1.定义路由 # 声明路由对象 router = SimpleRouter() # 定义资源 router.register(&amp;apos;student&amp;apos;, views.StuView) # 添加路由地址 urlpatterns += router.urls 2.views.py中定义 StuView类 mixins.RetrieveModelMixin: 能够通过id值查询某一个学生信">
 <meta name="keywords" content="Django">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django 基础配置(二)">
-<meta property="og:url" content="http://yoursite.com/2019/01/07/Django基础配置(二)/index.html">
+<meta property="og:title" content="CSRF具体使用">
+<meta property="og:url" content="http://yoursite.com/2019/01/11/CSRF的配置/index.html">
 <meta property="og:site_name" content="Duke&#39;s Blog">
-<meta property="og:description" content="Django 基础配置(二)一.setting.py文件1.添加templates路径 TEMPLATES = [ {  # 添加 os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;) &amp;apos;DIRS&amp;apos;: [os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;)], }, ] 2.添加app文件 INSTALLE">
+<meta property="og:description" content="1.定义路由 # 声明路由对象 router = SimpleRouter() # 定义资源 router.register(&amp;apos;student&amp;apos;, views.StuView) # 添加路由地址 urlpatterns += router.urls 2.views.py中定义 StuView类 mixins.RetrieveModelMixin: 能够通过id值查询某一个学生信">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-07T04:22:22.514Z">
+<meta property="og:updated_time" content="2019-01-11T04:03:45.038Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django 基础配置(二)">
-<meta name="twitter:description" content="Django 基础配置(二)一.setting.py文件1.添加templates路径 TEMPLATES = [ {  # 添加 os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;) &amp;apos;DIRS&amp;apos;: [os.path.join(BASE_DIR,&amp;apos;templates&amp;apos;)], }, ] 2.添加app文件 INSTALLE">
+<meta name="twitter:title" content="CSRF具体使用">
+<meta name="twitter:description" content="1.定义路由 # 声明路由对象 router = SimpleRouter() # 定义资源 router.register(&amp;apos;student&amp;apos;, views.StuView) # 添加路由地址 urlpatterns += router.urls 2.views.py中定义 StuView类 mixins.RetrieveModelMixin: 能够通过id值查询某一个学生信">
   
     <link rel="alternative" href="/atom.xml" title="Duke&#39;s Blog" type="application/atom+xml">
   
@@ -155,68 +155,77 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Django基础配置(二)" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-CSRF的配置" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Django 基础配置(二)
+      CSRF具体使用
     </h1>
   
 
         
-        <a href="/2019/01/07/Django基础配置(二)/" class="archive-article-date">
-  	<time datetime="2019-01-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-07</time>
+        <a href="/2019/01/11/CSRF的配置/" class="archive-article-date">
+  	<time datetime="2019-01-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Django-基础配置-二"><a href="#Django-基础配置-二" class="headerlink" title="Django 基础配置(二)"></a>Django 基础配置(二)</h2><h3 id="一-setting-py文件"><a href="#一-setting-py文件" class="headerlink" title="一.setting.py文件"></a>一.setting.py文件</h3><p>1.添加templates路径</p>
-<pre><code>TEMPLATES = [
-{
- # 添加 os.path.join(BASE_DIR,&apos;templates&apos;)
-&apos;DIRS&apos;: [os.path.join(BASE_DIR,&apos;templates&apos;)],
-},
-]
-</code></pre><p>2.添加app文件</p>
-<pre><code>INSTALLED_APPS = [
-#添加&apos;app&apos;
-&apos;app&apos;
-]
-</code></pre><p>3.修改DATABASE</p>
-<pre><code>DATABASES = {
-&apos;default&apos;: {
-    &apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
-    &apos;NAME&apos;: &apos;django2&apos;,
-    &apos;HOST&apos;: &apos;127.0.0.1&apos;,
-    &apos;USER&apos;: &apos;root&apos;,
-    &apos;PASSWORD&apos;: &apos;123456&apos;,
-    &apos;PORT&apos;: 3306,
-}
-}
-</code></pre><p>4.添加 os.path.join(BASE_DIR,’static’路径</p>
-<pre><code>STATIC_URL = &apos;/static/&apos;
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,&apos;static&apos;)
-]
-</code></pre><h3 id="二-init文件"><a href="#二-init文件" class="headerlink" title="二.init文件"></a>二.<strong>init</strong>文件</h3><pre><code>import pymysql
+        <p>1.定义路由</p>
+<pre><code># 声明路由对象
+router = SimpleRouter()
+# 定义资源
+router.register(&apos;student&apos;, views.StuView)
+# 添加路由地址
+urlpatterns += router.urls
+</code></pre><p>2.views.py中定义 StuView类</p>
+<p>mixins.RetrieveModelMixin: 能够通过id值查询某一个学生信息</p>
+<pre><code>class StuView(viewsets.GenericViewSet,
+          mixins.ListModelMixin,
+          mixins.RetrieveModelMixin,
+          mixins.CreateModelMixin,
+          mixins.DestroyModelMixin,
+          mixins.UpdateModelMixin):
+    # 指定资源返回的内容
+    queryset = Student.objects.all()
+    # queryset = Student.objects.filter(is_delete=0)
+    # 序列化queryset的结果
+    serializer_class =  StuSerializer
 
-pymysql.install_as_MySQLdb()
-</code></pre><h3 id="三-url-py文件"><a href="#三-url-py文件" class="headerlink" title="三.url.py文件"></a>三.url.py文件</h3><p>添加index使用路径:</p>
-<pre><code>from app import views
+    # 查询所有信息,过滤到删除的内容
+    def get_queryset(self):
+        queryset = self.queryset
 
-urlpatterns = [
-    path(&apos;admin/&apos;, admin.site.urls),
-    path(&apos;index/&apos;, views.index),
-]
-</code></pre><h3 id="四-views-py"><a href="#四-views-py" class="headerlink" title="四.views.py"></a>四.views.py</h3><p>添加index 函数    </p>
-<pre><code>def index(request):
-name = &apos;duke&apos;
-return render(request, &apos;index.html&apos;,{&apos;name&apos;: name})
+        return queryset.filter(is_delete=0)
+
+    # 重构delete方法(软删除)
+    def perform_destroy(self, instance):
+        instance.is_delete = 1
+        instance.save()
+</code></pre><p>3.新建serializers.py,定义StuSerializer的类</p>
+<pre><code>from rest_framework import serializers
+
+from app.models import Student
+
+
+class StuSerializer(serializers.ModelSerializer):
+
+class Meta:
+    # 序列化的模型
+    model = Student
+    fields = [&apos;s_name&apos;, &apos;s_gender&apos;, &apos;s_age&apos;]
+
+# 重构字段
+def to_representation(self, instance):
+    data = super(StuSerializer, self).to_representation(instance)
+
+    data[&apos;s_gender&apos;] = &apos;男&apos; if data[&apos;s_gender&apos;] else &apos;女&apos;
+
+    return data
 </code></pre>
       
 
@@ -312,7 +321,7 @@ return render(request, &apos;index.html&apos;,{&apos;name&apos;: name})
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/07/Django基础配置(二)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/11/CSRF的配置/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -326,18 +335,9 @@ return render(request, &apos;index.html&apos;,{&apos;name&apos;: name})
   
 <nav id="article-nav">
   
-    <a href="/2019/01/08/Django配置路由分发和接收参数/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          路由URLS
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/01/03/Django关于数据增删改查/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Django的增删改查</div>
+    <a href="/2019/01/10/DjangoRESTFrameWork/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Django REST framework</div>
       <i class="icon-circle-right"></i>
     </a>
   
