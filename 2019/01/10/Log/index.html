@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Duke&#39;s Blog</title>
+  <title>日志 | Duke&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Duke&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="一.setting.py文件中配置log:# 配置日志 LOG_PATH = os.path.join(BASE_DIR, &amp;apos;log&amp;apos;) LOGGING = {     &amp;apos;version&amp;apos;: 1 ,     # 禁用日志:False     &amp;apos;disable_existing_logger&amp;apos;: False,     &amp;apos;forma">
+<meta name="keywords" content="Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="日志">
+<meta property="og:url" content="http://yoursite.com/2019/01/10/Log/index.html">
 <meta property="og:site_name" content="Duke&#39;s Blog">
+<meta property="og:description" content="一.setting.py文件中配置log:# 配置日志 LOG_PATH = os.path.join(BASE_DIR, &amp;apos;log&amp;apos;) LOGGING = {     &amp;apos;version&amp;apos;: 1 ,     # 禁用日志:False     &amp;apos;disable_existing_logger&amp;apos;: False,     &amp;apos;forma">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/Q2KFch8.png">
+<meta property="og:updated_time" content="2019-01-11T01:52:28.133Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Duke&#39;s Blog">
+<meta name="twitter:title" content="日志">
+<meta name="twitter:description" content="一.setting.py文件中配置log:# 配置日志 LOG_PATH = os.path.join(BASE_DIR, &amp;apos;log&amp;apos;) LOGGING = {     &amp;apos;version&amp;apos;: 1 ,     # 禁用日志:False     &amp;apos;disable_existing_logger&amp;apos;: False,     &amp;apos;forma">
+<meta name="twitter:image" content="https://i.imgur.com/Q2KFch8.png">
   
     <link rel="alternative" href="/atom.xml" title="Duke&#39;s Blog" type="application/atom+xml">
   
@@ -150,323 +157,233 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Log" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      日志
+    </h1>
+  
+
+        
+        <a href="/2019/01/10/Log/" class="archive-article-date">
+  	<time datetime="2019-01-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-10</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-setting-py文件中配置log"><a href="#一-setting-py文件中配置log" class="headerlink" title="一.setting.py文件中配置log:"></a>一.setting.py文件中配置log:</h2><pre><code># 配置日志
+LOG_PATH = os.path.join(BASE_DIR, &apos;log&apos;)
+LOGGING = {
+    &apos;version&apos;: 1 ,
+    # 禁用日志:False
+    &apos;disable_existing_logger&apos;: False,
+    &apos;formatters&apos;: {
+        &apos;default&apos;: {
+            &apos;format&apos;: &apos;%(asctime)s %(message)s&apos;
+        },
+        &apos;simple&apos;: {
+            &apos;format&apos;: &apos;%(message)s&apos;
+        }
+    },
+    #  接收日志,并且交于console的处理handlers去处理
+    &apos;loggers&apos;: {
+        &apos;&apos;: {
+            &apos;handlers&apos;: [&apos;console&apos;],
+            &apos;level&apos;: &apos;INFO&apos;
+        }
+    },
+    &apos;handlers&apos;: {
+        &apos;console&apos;: {
+            &apos;level&apos;: &apos;INFO&apos;,
+            &apos;filename&apos;: &apos;%s/sys.log&apos; % LOG_PATH,
+            &apos;formatter&apos;: &apos;default&apos;,
+            &apos;class&apos;: &apos;logging.handlers.RotatingFileHandler&apos;,
+            &apos;maxBytes&apos;: 5 * 1024 * 1024
+        }
+    }
+}
+</code></pre><h2 id="二-在根目录下新建一个log文件夹"><a href="#二-在根目录下新建一个log文件夹" class="headerlink" title="二.在根目录下新建一个log文件夹"></a>二.在根目录下新建一个log文件夹</h2><h2 id="三-在中间件中添加log的类"><a href="#三-在中间件中添加log的类" class="headerlink" title="三.在中间件中添加log的类"></a>三.在中间件中添加log的类</h2><pre><code>class LoggingMiddleware(MiddlewareMixin):
+
+    def process_request(self, request):
+        # 初始化时间
+        request.init_time = time.time()
+
+    def process_response(self, request, response):
+        try:# 请求到响应之间消耗时长
+            count_times = time.time() - request.init_time
+            # 请求的地址和请求方式
+            path = request.path
+            method = request.method
+            # 响应的状态码
+            status = response.status_code
+            content = response.content
+            # 日志记录的信息
+            message = &apos;%s %s %s %s %s &apos; % (path, method, status, content, count_times)
+            logger.info(message)
+        except Exception as e:
+            logger.critical(&apos;log error: %s&apos; % e)
+
+        return response
+</code></pre><h2 id="四-最后在setting-py文件中添加log的中间件"><a href="#四-最后在setting-py文件中添加log的中间件" class="headerlink" title="四.最后在setting.py文件中添加log的中间件"></a>四.最后在setting.py文件中添加log的中间件</h2><p><img src="https://i.imgur.com/Q2KFch8.png" alt=""></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/28/redis2/" class="archive-article-date">
-  	<time datetime="2018-12-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/28/redis2/">redis 多种数据指令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/10/Log/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/27/redis/" class="archive-article-date">
-  	<time datetime="2018-12-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-27</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/01/10/DjangoRESTFrameWork/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Django REST framework
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/09/Decorator/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Django中的装饰器</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/27/redis/">Redis基础</a>
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/22/css/" class="archive-article-date">
-  	<time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/22/css/">css选择器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">css学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/22/display/" class="archive-article-date">
-  	<time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/22/display/">css属性</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">css学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/22/html/" class="archive-article-date">
-  	<time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/22/html/">HTML学习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">HTML相关学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/22/js/" class="archive-article-date">
-  	<time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/21/ok/" class="archive-article-date">
-  	<time datetime="2018-12-21T02:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/21/ok/">git远程仓库 ssh秘钥 服务器问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/12/21/web/" class="archive-article-date">
-  	<time datetime="2018-12-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/12/21/web/">my website</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">我的个人网站</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
   
 
 
@@ -490,8 +407,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
