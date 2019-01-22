@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Django基础配置(一) | Duke&#39;s Blog</title>
+  <title>Flask(路由-请求响应) | Duke&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
-<meta name="keywords" content="Django">
+  <meta name="description" content="(1).路由重定向: 使用redirect实现重定向,且括号内为需要跳转的路由     @blue.route(&amp;apos;/redirect_hello/&amp;apos;) def redirect_hello():     # 实现重定向:     # 第一种方式     # return redirect(&amp;apos;/app/hello/&amp;apos;)      # 第二种方式: 使用url_">
+<meta name="keywords" content="Flask">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django基础配置(一)">
-<meta property="og:url" content="http://yoursite.com/2019/01/02/Django基础配置(一)/index.html">
+<meta property="og:title" content="Flask(路由-请求响应)">
+<meta property="og:url" content="http://yoursite.com/2019/01/22/Flask(路由-请求响应)/index.html">
 <meta property="og:site_name" content="Duke&#39;s Blog">
-<meta property="og:description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
+<meta property="og:description" content="(1).路由重定向: 使用redirect实现重定向,且括号内为需要跳转的路由     @blue.route(&amp;apos;/redirect_hello/&amp;apos;) def redirect_hello():     # 实现重定向:     # 第一种方式     # return redirect(&amp;apos;/app/hello/&amp;apos;)      # 第二种方式: 使用url_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-02T08:48:28.000Z">
+<meta property="og:updated_time" content="2019-01-22T04:20:32.230Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django基础配置(一)">
-<meta name="twitter:description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
+<meta name="twitter:title" content="Flask(路由-请求响应)">
+<meta name="twitter:description" content="(1).路由重定向: 使用redirect实现重定向,且括号内为需要跳转的路由     @blue.route(&amp;apos;/redirect_hello/&amp;apos;) def redirect_hello():     # 实现重定向:     # 第一种方式     # return redirect(&amp;apos;/app/hello/&amp;apos;)      # 第二种方式: 使用url_">
   
     <link rel="alternative" href="/atom.xml" title="Duke&#39;s Blog" type="application/atom+xml">
   
@@ -155,62 +155,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Django基础配置(一)" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-Flask(路由-请求响应)" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Django基础配置(一)
+      Flask(路由-请求响应)
     </h1>
   
 
         
-        <a href="/2019/01/02/Django基础配置(一)/" class="archive-article-date">
-  	<time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
+        <a href="/2019/01/22/Flask(路由-请求响应)/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Django基础配置-一"><a href="#Django基础配置-一" class="headerlink" title="Django基础配置(一)"></a>Django基础配置(一)</h1><p>创建一个写内容的项目,取名为<br>python manage.py startapp app </p>
-<p><strong>MVT:</strong></p>
-<ol>
-<li>M: models.py,模型层:</li>
-<li>V: views.py, 写业务逻辑的地方</li>
-<li>T: templates,模板,定义页面</li>
-</ol>
-<p>注意: MVT模式是由MVC模式演变出来的.</p>
-<p>MVC模式是所有框架遵循的模式.</p>
-<p><strong>MVC:</strong></p>
-<ol>
-<li>M: 模型层 </li>
-<li>V: 模板,html页面</li>
-<li>C: 业务逻辑层 – controller 写业务逻辑的地方</li>
-</ol>
-<p><strong>一.settings.py中配置</strong></p>
-<pre><code>DATABASES = {
-&apos;default&apos;: {
-&apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
-&apos;NAME&apos;: &apos;dj8&apos;,
-&apos;USER&apos;: &apos;root&apos;,
-&apos;PASSWORD&apos;: &apos;123456&apos;,
-&apos;HOST&apos;: &apos;127.0.0.1&apos;,
-&apos;PORT&apos;: 3306
-}
-}
-</code></pre><p>如果出错,在DATABASE中添加’OPTIONS’:{‘isolation_level’:None}</p>
-<p><strong>二.安装pymysql</strong></p>
-<pre><code>在工程目录的__init__.py文件中 定义 pymysql.install_as_MySQLdb
-</code></pre><p><strong>三.迁移和插入管理员账号</strong></p>
-<pre><code>1. python manage.py migrate 迁移
-2. python manage.py createsuperuser 插入管理员账号
-</code></pre><p><strong>四.如果在model.py中添加了表之后进行迁移</strong></p>
-<pre><code>1. 生成迁移文件 python manage.py makemigrations
-2. 迁移 python manage.py migrate
-</code></pre>
+        <p>(1).路由重定向:</p>
+<p>使用redirect实现重定向,且括号内为需要跳转的路由</p>
+<pre><code>    @blue.route(&apos;/redirect_hello/&apos;)
+def redirect_hello():
+    # 实现重定向:
+    # 第一种方式
+    # return redirect(&apos;/app/hello/&apos;)
+
+    # 第二种方式: 使用url_for的形式进行反向解析
+    # url_for(&apos;生成蓝图的第一个参数,重定向的函数名&apos;)
+    return redirect(url_for(&apos;first.stu&apos;, id = 1))
+</code></pre><p>(2).触发错误<br>因为flask不会报错误,所以自己定义:</p>
+<pre><code> @blue.route(&apos;/index/&apos;)
+def index():
+    try:
+        1/0
+    except Exception as e:
+        abort(500)
+
+    return &apos;hello&apos;
+
+@blue.errorhandler(500)
+def error_500(e):
+    return &apos;exception as %s&apos; % e
+</code></pre><h3 id="一-请求与响应"><a href="#一-请求与响应" class="headerlink" title="一.请求与响应"></a>一.请求与响应</h3><h4 id="1-请求"><a href="#1-请求" class="headerlink" title="(1)请求"></a>(1)请求</h4><p>1.获取值<br>GET : </p>
+<pre><code>request.args.get(&apos;key&apos;)
+request.args.getlist(&apos;key&apos;)
+</code></pre><p>POST/PUT/PATCH/DELETE/:</p>
+<pre><code>request.form.get(&apos;key&apos;)
+request.form.getlist(&apos;key&apos;)
+</code></pre><p>2.获取请求方式 - request.method</p>
+<p>3.获取路由 - request.path</p>
+<p>4.获取cookie - request.cookie</p>
+<p>5.获取文件 - request.files</p>
+<h4 id="2-响应"><a href="#2-响应" class="headerlink" title="(2).响应"></a>(2).响应</h4><p>make_response(响应内容,状态码(默认为200))</p>
+<p>响应对象.set_cookie(key,value,max_age) : 添加key值</p>
+<p>响应对象.delete_cookie(key) : 删除cookie的对应key值</p>
+
       
 
       
@@ -249,7 +251,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
         		</li>
       		
 		</ul>
@@ -305,7 +307,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/02/Django基础配置(一)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/22/Flask(路由-请求响应)/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -319,18 +321,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/01/03/Django关于数据增删改查/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/01/22/Flask(安装-管理-蓝图)/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Django的增删改查
+          Flask(安装-蓝图)
         
       </div>
     </a>
   
   
-    <a href="/2019/01/02/Pycharm快捷键/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Pycharm快捷键</div>
+    <a href="/2019/01/22/session的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">session的使用</div>
       <i class="icon-circle-right"></i>
     </a>
   

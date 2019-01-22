@@ -152,6 +152,377 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Flask(安装-管理-蓝图)" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/22/Flask(安装-管理-蓝图)/">Flask(安装-蓝图)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/22/Flask(安装-管理-蓝图)/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a>Flask</h2><p>什么是flask?<br>一个微量级别的python web 框架</p>
+<h3 id="一-创建虚拟环境和最小的flask最小应用"><a href="#一-创建虚拟环境和最小的flask最小应用" class="headerlink" title="一.创建虚拟环境和最小的flask最小应用"></a>一.创建虚拟环境和最小的flask最小应用</h3><p>1.使用virtualenv创建虚拟环境flaskenv</p>
+<pre><code>virtualenv --no-site-packages -p (python环境路径) 文件名
+</code></pre><p>2.激活虚拟环境,安装flask第三方库</p>
+<pre><code>pip install flask
+</code></pre><p>3.启动pycharm 打开我们在新建的文件夹day01,新建一个hello.py.</p>
+<p>最小7行代码,实现flask最小应用,运行即可.</p>
+<p><img src="https://i.imgur.com/5p5kxLe.png" alt=""></p>
+<h3 id="二-改变flask-ip和端口"><a href="#二-改变flask-ip和端口" class="headerlink" title="二.改变flask ip和端口"></a>二.改变flask ip和端口</h3><p>1.安装flask-script库<br>(1). 可以将所有要安装的库名保存到requirement.txt中,通过指令安装</p>
+<pre><code>pip install -r requirement.txt 
+</code></pre><p>(2).新建manage.py,导入三方库中的Manager,对app对象进行管理</p>
+<p>启动命令: Teminal中:</p>
+<pre><code>python manage.py runserver -p 端口 -h 0.0.0.0 -d
+</code></pre><p><img src="https://i.imgur.com/ratcyWx.png" alt=""></p>
+<h3 id="三-蓝图使用"><a href="#三-蓝图使用" class="headerlink" title="三.蓝图使用"></a>三.蓝图使用</h3><p>(1).安装flask-blueprint库</p>
+<p>(2).在views.py中生成一个蓝图对象</p>
+<pre><code>from flask import Blueprint
+blue = Blueprint(&apos;first&apos;, __name__)
+@blue.route(&apos;/hello/&apos;)
+</code></pre><p>(3).在manage.py中注册一个蓝图</p>
+<pre><code>from app.views import blue
+app.register_blueprint(blueprint=blue,url_prefix=&apos;/app&apos;)
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/22/Flask(安装-管理-蓝图)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Flask(路由-请求响应)" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/22/Flask(路由-请求响应)/">Flask(路由-请求响应)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/22/Flask(路由-请求响应)/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>(1).路由重定向:</p>
+<p>使用redirect实现重定向,且括号内为需要跳转的路由</p>
+<pre><code>    @blue.route(&apos;/redirect_hello/&apos;)
+def redirect_hello():
+    # 实现重定向:
+    # 第一种方式
+    # return redirect(&apos;/app/hello/&apos;)
+
+    # 第二种方式: 使用url_for的形式进行反向解析
+    # url_for(&apos;生成蓝图的第一个参数,重定向的函数名&apos;)
+    return redirect(url_for(&apos;first.stu&apos;, id = 1))
+</code></pre><p>(2).触发错误<br>因为flask不会报错误,所以自己定义:</p>
+<pre><code> @blue.route(&apos;/index/&apos;)
+def index():
+    try:
+        1/0
+    except Exception as e:
+        abort(500)
+
+    return &apos;hello&apos;
+
+@blue.errorhandler(500)
+def error_500(e):
+    return &apos;exception as %s&apos; % e
+</code></pre><h3 id="一-请求与响应"><a href="#一-请求与响应" class="headerlink" title="一.请求与响应"></a>一.请求与响应</h3><h4 id="1-请求"><a href="#1-请求" class="headerlink" title="(1)请求"></a>(1)请求</h4><p>1.获取值<br>GET : </p>
+<pre><code>request.args.get(&apos;key&apos;)
+request.args.getlist(&apos;key&apos;)
+</code></pre><p>POST/PUT/PATCH/DELETE/:</p>
+<pre><code>request.form.get(&apos;key&apos;)
+request.form.getlist(&apos;key&apos;)
+</code></pre><p>2.获取请求方式 - request.method</p>
+<p>3.获取路由 - request.path</p>
+<p>4.获取cookie - request.cookie</p>
+<p>5.获取文件 - request.files</p>
+<h4 id="2-响应"><a href="#2-响应" class="headerlink" title="(2).响应"></a>(2).响应</h4><p>make_response(响应内容,状态码(默认为200))</p>
+<p>响应对象.set_cookie(key,value,max_age) : 添加key值</p>
+<p>响应对象.delete_cookie(key) : 删除cookie的对应key值</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/22/Flask(路由-请求响应)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-session的使用" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/22/session的使用/">session的使用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/22/session的使用/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-session的使用"><a href="#一-session的使用" class="headerlink" title="一.session的使用"></a>一.session的使用</h2><h3 id="1-flask自带形式"><a href="#1-flask自带形式" class="headerlink" title="1.flask自带形式"></a>1.flask自带形式</h3><pre><code>存储形式:将session中存储键值对内容存放在cookie中
+存储方式:设置secret_key参数,越复杂越好
+使用方式:
+from flask import session
+session[&apos;key&apos;] = value
+</code></pre><h3 id="2-使用第三方库和flask-session"><a href="#2-使用第三方库和flask-session" class="headerlink" title="2.使用第三方库和flask-session"></a>2.使用第三方库和flask-session</h3><p>(1)安装:</p>
+<pre><code>pip install flask-session
+</code></pre><p>(2)配置存储的数据库</p>
+<pre><code>flask对象.config[&apos;SESSION_TYPE&apos;] = &apos;redis&apos;
+flask对象.config[&apos;SESSION_REDIS&apos;] = redis.Redis(host,port,password)
+</code></pre><p>(3)初始化:</p>
+<pre><code>from flask-session import session
+第一种:
+Session(flask对象)
+第二种:
+se = Session()
+se.init_app(flask对象)
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/22/session的使用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-装饰器" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/22/装饰器/">装饰器</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/22/装饰器/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一.装饰器</p>
+<p>如果有参数传入,所以需要内层函数需要(* args,**kwargs)</p>
+<p><img src="https://i.imgur.com/acXTIjY.png" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/22/装饰器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-git指令" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -890,434 +1261,9 @@ def hindex(request):
 
 
   
-    <article id="post-Django配置路由分发和接收参数" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/08/Django配置路由分发和接收参数/">路由URLS</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/08/Django配置路由分发和接收参数/" class="archive-article-date">
-  	<time datetime="2019-01-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>配置路由分发:</p>
-<pre><code>path(&apos;app/&apos;, include(&apos;app.urls&apos;)),
-path(&apos;app/&apos;, include((&apos;app.urls&apos;, &apos;app&apos;)))
-</code></pre><p>接收参数: </p>
-<pre><code>- 接收整型:&lt;int:id&gt;: 其中id参数为int类型
-- 接收字符串:&lt;str: name&gt; :  其中name为str类型
-- 接收uuid:&lt;uuid: uid&gt; : 其中uid参数为uuid类型
-- 接收path: &lt;path:ph&gt; : 其中ph参数为路径
-- re_path:/index/(+d)/ :  正则匹配int整型
-- re_path(&apos;params/(\d+)/(\d+)/(\d+)&apos;): 正则接收多个参数:接收参数的顺序和路由中定义的正则顺序相同
-- re_path(&apos;params/(?P&lt;year&gt;\d+)/(?P&lt;month&gt;\d+)/(?P&lt;day&gt;\d+)&apos;: 正则接收多个参数: 接收参数的顺序和路由定义的正则顺序无关
-- path(&apos;params/&lt;int:year&gt;/&lt;int:month&gt;/&lt;int:day&gt;&apos;, views.params): 接收多个变量&quot;定义多个变量,与路由顺序无关.
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/08/Django配置路由分发和接收参数/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Django基础配置(二)" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/07/Django基础配置(二)/">Django 基础配置(二)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/07/Django基础配置(二)/" class="archive-article-date">
-  	<time datetime="2019-01-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Django-基础配置-二"><a href="#Django-基础配置-二" class="headerlink" title="Django 基础配置(二)"></a>Django 基础配置(二)</h2><h3 id="一-setting-py文件"><a href="#一-setting-py文件" class="headerlink" title="一.setting.py文件"></a>一.setting.py文件</h3><p>1.添加templates路径</p>
-<pre><code>TEMPLATES = [
-{
- # 添加 os.path.join(BASE_DIR,&apos;templates&apos;)
-&apos;DIRS&apos;: [os.path.join(BASE_DIR,&apos;templates&apos;)],
-},
-]
-</code></pre><p>2.添加app文件</p>
-<pre><code>INSTALLED_APPS = [
-#添加&apos;app&apos;
-&apos;app&apos;
-]
-</code></pre><p>3.修改DATABASE</p>
-<pre><code>DATABASES = {
-&apos;default&apos;: {
-    &apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
-    &apos;NAME&apos;: &apos;django2&apos;,
-    &apos;HOST&apos;: &apos;127.0.0.1&apos;,
-    &apos;USER&apos;: &apos;root&apos;,
-    &apos;PASSWORD&apos;: &apos;123456&apos;,
-    &apos;PORT&apos;: 3306,
-}
-}
-</code></pre><p>4.添加 os.path.join(BASE_DIR,’static’路径</p>
-<pre><code>STATIC_URL = &apos;/static/&apos;
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,&apos;static&apos;)
-]
-</code></pre><h3 id="二-init文件"><a href="#二-init文件" class="headerlink" title="二.init文件"></a>二.<strong>init</strong>文件</h3><pre><code>import pymysql
-
-pymysql.install_as_MySQLdb()
-</code></pre><h3 id="三-url-py文件"><a href="#三-url-py文件" class="headerlink" title="三.url.py文件"></a>三.url.py文件</h3><p>添加index使用路径:</p>
-<pre><code>from app import views
-
-urlpatterns = [
-    path(&apos;admin/&apos;, admin.site.urls),
-    path(&apos;index/&apos;, views.index),
-]
-</code></pre><h3 id="四-views-py"><a href="#四-views-py" class="headerlink" title="四.views.py"></a>四.views.py</h3><p>添加index 函数    </p>
-<pre><code>def index(request):
-name = &apos;duke&apos;
-return render(request, &apos;index.html&apos;,{&apos;name&apos;: name})
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/07/Django基础配置(二)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Django关于数据增删改查" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/03/Django关于数据增删改查/">Django的增删改查</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/03/Django关于数据增删改查/" class="archive-article-date">
-  	<time datetime="2019-01-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>ORM (objects relationship mapping): 对象关系映射</p>
-<h1 id="Django的增删改查"><a href="#Django的增删改查" class="headerlink" title="Django的增删改查:"></a><strong>Django的增删改查:</strong></h1><h2 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据:"></a>增加数据:</h2><h3 id="插入数据第一种方法"><a href="#插入数据第一种方法" class="headerlink" title="插入数据第一种方法:"></a>插入数据第一种方法:</h3><pre><code>Student.objects.create(s_name=&apos;duke&apos;) 
-</code></pre><h3 id="插入数据的第二种方法"><a href="#插入数据的第二种方法" class="headerlink" title="插入数据的第二种方法:"></a>插入数据的第二种方法:</h3><pre><code>stu = Student()  
-stu.s_name = &apos;马儒&apos;
-stu.s_gender = 1
-stu.save()
-</code></pre><h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据:"></a>删除数据:</h2><pre><code>Student.objects.filter(id=1).delete()
-</code></pre><h2 id="修改-更新-数据"><a href="#修改-更新-数据" class="headerlink" title="修改(更新)数据:"></a>修改(更新)数据:</h2><pre><code>save()方法:模型对象.save()
-update()方法,模型名.objects.filter(条件).update(字段=值)
-save(方法可以改变更新时间)
-</code></pre><h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据:"></a>查询数据:</h2><h4 id="filter-方法-查询满足条件的信息-模型名-objects-filter-条件"><a href="#filter-方法-查询满足条件的信息-模型名-objects-filter-条件" class="headerlink" title="filter()方法         查询满足条件的信息:模型名.objects.filter(条件)"></a>filter()方法         查询满足条件的信息:模型名.objects.filter(条件)</h4><pre><code>stus = Student.objects.filter(s_gender=1)
-</code></pre><h4 id="all-查询所有"><a href="#all-查询所有" class="headerlink" title="all()               查询所有"></a>all()               查询所有</h4><pre><code>stus = Student.objects.all()
-</code></pre><h4 id="get-方法"><a href="#get-方法" class="headerlink" title="get()方法:"></a>get()方法:</h4><h4 id="1-get-取唯一的一个对象"><a href="#1-get-取唯一的一个对象" class="headerlink" title="1.get()取唯一的一个对象"></a>1.get()取唯一的一个对象</h4><h4 id="2-get-条件-条件必须成立"><a href="#2-get-条件-条件必须成立" class="headerlink" title="2.get(条件) 条件必须成立"></a>2.get(条件) 条件必须成立</h4><pre><code>get()取唯一的一个对象
-stu = Student.objects.get(id=2)
-</code></pre><h4 id="exclude-方法-查询出不满足条件的信息-模型名-objects-exclude-条件"><a href="#exclude-方法-查询出不满足条件的信息-模型名-objects-exclude-条件" class="headerlink" title="exclude()方法:       查询出不满足条件的信息:模型名.objects.exclude(条件)"></a>exclude()方法:       查询出不满足条件的信息:模型名.objects.exclude(条件)</h4><pre><code>stus = Student.objects.exclude(s_gender=0)
-</code></pre><h4 id="first-取第一个对象"><a href="#first-取第一个对象" class="headerlink" title="first()             取第一个对象"></a>first()             取第一个对象</h4><pre><code>stu = Student.objects.filter(s_age=20).first()
-</code></pre><h4 id="order-by-方法-排序-默认升序"><a href="#order-by-方法-排序-默认升序" class="headerlink" title="order_by()方法:     排序:默认升序 ;"></a>order_by()方法:     排序:默认升序 ;</h4><h4 id="order-by-‘-‘-降序"><a href="#order-by-‘-‘-降序" class="headerlink" title="order_by(‘-‘)       降序"></a>order_by(‘-‘)       降序</h4><pre><code>stus = Student.objects.order_by(&apos;id&apos;)
-#降序
-stus = Student.objects.order_by(&apos;-id&apos;)
-</code></pre><h4 id="values-方法-取查询对象中的字段"><a href="#values-方法-取查询对象中的字段" class="headerlink" title="values()方法:       取查询对象中的字段"></a>values()方法:       取查询对象中的字段</h4><pre><code>#取出对象中的某个字段
-stus = Student.objects.all().values(&apos;s_name&apos;,&apos;s_age&apos;)
-</code></pre><h4 id="exists-判断查询结果是否村存在-返回True或者False"><a href="#exists-判断查询结果是否村存在-返回True或者False" class="headerlink" title="exists():判断查询结果是否村存在.返回True或者False"></a>exists():判断查询结果是否村存在.返回True或者False</h4><pre><code>#判断查询结果是否存在
-a = Student.objects.filter(s_name=&apos;校长&apos;).exists()
-</code></pre><h4 id="count-计算结果的个数"><a href="#count-计算结果的个数" class="headerlink" title="count():计算结果的个数"></a>count():计算结果的个数</h4><pre><code>b = Student.objects.filter(s_gender=1).count()
-</code></pre><h4 id="pk-主键-相当于id-—pk-in-在什么范围之内"><a href="#pk-主键-相当于id-—pk-in-在什么范围之内" class="headerlink" title="pk:主键 (相当于id)—pk__in=[]:在什么范围之内"></a>pk:主键 (相当于id)—pk__in=[]:在什么范围之内</h4><pre><code>stus = Student.objects.filter(id__in=[1,2,3,4,5,6,7,8])
-print(stus)
-stus = Student.objects.filter(pk__in=[1,2,3,4,5,6,7,8])
-</code></pre><h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><h4 id="contains包含"><a href="#contains包含" class="headerlink" title="contains包含"></a>contains包含</h4><pre><code>c = Student.objects.filter(s_name__contains=&apos;小明&apos;)
-</code></pre><h4 id="startswith-以什么开头"><a href="#startswith-以什么开头" class="headerlink" title="startswith:以什么开头"></a>startswith:以什么开头</h4><h4 id="endswith-以什么结束"><a href="#endswith-以什么结束" class="headerlink" title="endswith:以什么结束"></a>endswith:以什么结束</h4><pre><code>d = Student.objects.filter(s_name__startswith=&apos;小&apos;)
-print(d.values())
-
-e = Student.objects.filter(s_name__endswith=&apos;明&apos;)
-</code></pre><h4 id="gt-gte-lt-lte-大于-大于等于-小于-小于等于"><a href="#gt-gte-lt-lte-大于-大于等于-小于-小于等于" class="headerlink" title="gt; gte ;lt ;lte: 大于 ;大于等于 ;小于 ;小于等于"></a>gt; gte ;lt ;lte: 大于 ;大于等于 ;小于 ;小于等于</h4><pre><code>stus = Student.objects.filter(s_age__gte=18,s_age__lte=20)
-</code></pre><h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><h4 id="from-django-db-models-import-Avg-Count-Min-Max-Sum"><a href="#from-django-db-models-import-Avg-Count-Min-Max-Sum" class="headerlink" title="from django.db.models import Avg, Count, Min, Max, Sum"></a>from django.db.models import Avg, Count, Min, Max, Sum</h4><h4 id="语法-模型名-objects-agrregate-Sum"><a href="#语法-模型名-objects-agrregate-Sum" class="headerlink" title="语法:模型名.objects.agrregate(Sum())"></a>语法:模型名.objects.agrregate(Sum())</h4><pre><code>age_avg = Student.objects.all().aggregate(Avg(&apos;s_age&apos;))
-
-age_avg = Student.objects.all().aggregate(Sum(&apos;s_age&apos;))
-</code></pre><h4 id="Q-与或非"><a href="#Q-与或非" class="headerlink" title="Q: 与或非"></a>Q: 与或非</h4><pre><code>1. 逗号隔开就是与操作,Q()之后可以使用&amp;---与
-2. Q()之后使用 &apos;|&apos;, or -----或
-3. Q()之后使用&apos;~&apos; ------非
-
-stus = Student.objects.filter(Q(s_age__gte=18)|Q(s_age__lt=20))#或
-stus = Student.objects.filter(Q(s_age__gte=18)&amp;Q(s_age__lt=20))#且
-stus = Student.objects.filter(~Q(s_age__gte=18))#取反
-</code></pre><h4 id="F"><a href="#F" class="headerlink" title="F:"></a>F:</h4><h4 id="用于比较两个字段-可使用-符号"><a href="#用于比较两个字段-可使用-符号" class="headerlink" title="用于比较两个字段,可使用+,-符号"></a>用于比较两个字段,可使用+,-符号</h4><h4 id="模型名-objects-filter-physics-gt-F-‘math’-10"><a href="#模型名-objects-filter-physics-gt-F-‘math’-10" class="headerlink" title="模型名.objects.filter(physics__gt = F(‘math’) - 10)"></a>模型名.objects.filter(physics__gt = F(‘math’) - 10)</h4><pre><code>stus = Student.objects.filter(physics__gt= F(&apos;math&apos;))
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/03/Django关于数据增删改查/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Django基础配置(一)" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/02/Django基础配置(一)/">Django基础配置(一)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/02/Django基础配置(一)/" class="archive-article-date">
-  	<time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Django基础配置-一"><a href="#Django基础配置-一" class="headerlink" title="Django基础配置(一)"></a>Django基础配置(一)</h1><p>创建一个写内容的项目,取名为<br>python manage.py startapp app </p>
-<p><strong>MVT:</strong></p>
-<ol>
-<li>M: models.py,模型层:</li>
-<li>V: views.py, 写业务逻辑的地方</li>
-<li>T: templates,模板,定义页面</li>
-</ol>
-<p>注意: MVT模式是由MVC模式演变出来的.</p>
-<p>MVC模式是所有框架遵循的模式.</p>
-<p><strong>MVC:</strong></p>
-<ol>
-<li>M: 模型层 </li>
-<li>V: 模板,html页面</li>
-<li>C: 业务逻辑层 – controller 写业务逻辑的地方</li>
-</ol>
-<p><strong>一.settings.py中配置</strong></p>
-<pre><code>DATABASES = {
-&apos;default&apos;: {
-&apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
-&apos;NAME&apos;: &apos;dj8&apos;,
-&apos;USER&apos;: &apos;root&apos;,
-&apos;PASSWORD&apos;: &apos;123456&apos;,
-&apos;HOST&apos;: &apos;127.0.0.1&apos;,
-&apos;PORT&apos;: 3306
-}
-}
-</code></pre><p>如果出错,在DATABASE中添加’OPTIONS’:{‘isolation_level’:None}</p>
-<p><strong>二.安装pymysql</strong></p>
-<pre><code>在工程目录的__init__.py文件中 定义 pymysql.install_as_MySQLdb
-</code></pre><p><strong>三.迁移和插入管理员账号</strong></p>
-<pre><code>1. python manage.py migrate 迁移
-2. python manage.py createsuperuser 插入管理员账号
-</code></pre><p><strong>四.如果在model.py中添加了表之后进行迁移</strong></p>
-<pre><code>1. 生成迁移文件 python manage.py makemigrations
-2. 迁移 python manage.py migrate
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/02/Django基础配置(一)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1416,6 +1362,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">css学习</a>
               </li>
              
@@ -1432,15 +1386,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">我的个人网站</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
+                <a href="javascript:void(0)" class="js-tag color2">我的个人网站</a>
               </li>
             
             <div class="clearfix"></div>

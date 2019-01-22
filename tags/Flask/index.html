@@ -6,20 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Django基础配置(一) | Duke&#39;s Blog</title>
+  <title>Tag: Flask | Duke&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
-<meta name="keywords" content="Django">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Django基础配置(一)">
-<meta property="og:url" content="http://yoursite.com/2019/01/02/Django基础配置(一)/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Duke&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/tags/Flask/index.html">
 <meta property="og:site_name" content="Duke&#39;s Blog">
-<meta property="og:description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-02T08:48:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django基础配置(一)">
-<meta name="twitter:description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
+<meta name="twitter:title" content="Duke&#39;s Blog">
   
     <link rel="alternative" href="/atom.xml" title="Duke&#39;s Blog" type="application/atom+xml">
   
@@ -155,215 +150,174 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Django基础配置(一)" class="article article-type-post " itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Django基础配置(一)
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/01/22/Flask(安装-管理-蓝图)/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/01/22/Flask(安装-管理-蓝图)/">Flask(安装-蓝图)</a>
     </h1>
   
 
-        
-        <a href="/2019/01/02/Django基础配置(一)/" class="archive-article-date">
-  	<time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Django基础配置-一"><a href="#Django基础配置-一" class="headerlink" title="Django基础配置(一)"></a>Django基础配置(一)</h1><p>创建一个写内容的项目,取名为<br>python manage.py startapp app </p>
-<p><strong>MVT:</strong></p>
-<ol>
-<li>M: models.py,模型层:</li>
-<li>V: views.py, 写业务逻辑的地方</li>
-<li>T: templates,模板,定义页面</li>
-</ol>
-<p>注意: MVT模式是由MVC模式演变出来的.</p>
-<p>MVC模式是所有框架遵循的模式.</p>
-<p><strong>MVC:</strong></p>
-<ol>
-<li>M: 模型层 </li>
-<li>V: 模板,html页面</li>
-<li>C: 业务逻辑层 – controller 写业务逻辑的地方</li>
-</ol>
-<p><strong>一.settings.py中配置</strong></p>
-<pre><code>DATABASES = {
-&apos;default&apos;: {
-&apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
-&apos;NAME&apos;: &apos;dj8&apos;,
-&apos;USER&apos;: &apos;root&apos;,
-&apos;PASSWORD&apos;: &apos;123456&apos;,
-&apos;HOST&apos;: &apos;127.0.0.1&apos;,
-&apos;PORT&apos;: 3306
-}
-}
-</code></pre><p>如果出错,在DATABASE中添加’OPTIONS’:{‘isolation_level’:None}</p>
-<p><strong>二.安装pymysql</strong></p>
-<pre><code>在工程目录的__init__.py文件中 定义 pymysql.install_as_MySQLdb
-</code></pre><p><strong>三.迁移和插入管理员账号</strong></p>
-<pre><code>1. python manage.py migrate 迁移
-2. python manage.py createsuperuser 插入管理员账号
-</code></pre><p><strong>四.如果在model.py中添加了表之后进行迁移</strong></p>
-<pre><code>1. 生成迁移文件 python manage.py makemigrations
-2. 迁移 python manage.py migrate
-</code></pre>
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/weixin.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/02/Django基础配置(一)/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
   
-<nav id="article-nav">
-  
-    <a href="/2019/01/03/Django关于数据增删改查/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Django的增删改查
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/01/02/Pycharm快捷键/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Pycharm快捷键</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/01/22/Flask(路由-请求响应)/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
+</a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
+    	 
   
-  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/01/22/Flask(路由-请求响应)/">Flask(路由-请求响应)</a>
+    </h1>
   
 
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/01/22/session的使用/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/01/22/session的使用/">session的使用</a>
+    </h1>
   
 
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/01/22/装饰器/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/01/22/装饰器/">装饰器</a>
+    </h1>
   
 
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
   
+  
+    </div></section>
+  
+
+    
 
 
           </div>
@@ -386,9 +340,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -152,58 +152,39 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-虚拟环境安装+创建py项目" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+    <article id="post-Django配置路由分发和接收参数" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/02/虚拟环境安装+创建py项目/">虚拟环境安装+创建py项目</a>
+      <a class="article-title" href="/2019/01/08/Django配置路由分发和接收参数/">路由URLS</a>
     </h1>
   
 
         
-        <a href="/2019/01/02/虚拟环境安装+创建py项目/" class="archive-article-date">
-  	<time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
+        <a href="/2019/01/08/Django配置路由分发和接收参数/" class="archive-article-date">
+  	<time datetime="2019-01-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一-虚拟环境安装"><a href="#一-虚拟环境安装" class="headerlink" title="一.虚拟环境安装"></a><em>一.虚拟环境安装</em></h1><p> <strong>第一步(安装virtualenv):</strong> </p>
-<p>打开命令提示符(cmd)</p>
-<pre><code>pip install virtualenv /安装虚拟环境(pip install  --user virtualenv)
-</code></pre><p> <strong>第二步(创建虚拟环境):</strong><br>指定文件夹下:</p>
-<pre><code>pip virtualenv --no-site-packages -p C:\Program Files\Python37\python.exe djenv8 
-</code></pre><blockquote>
-<p>代码注解:<br>创建虚拟环境文件(–no-site-packages: 表示创建的虚拟环境是纯净的环境,不安装有其他的库)(-p : 表示虚拟环境中的环境参数+虚拟环境名字)</p>
-</blockquote>
-<p><strong>第三步 查看当前安装的库和库的版本</strong></p>
-<p><code>pip list</code> </p>
-<h1 id="二-创建py项目"><a href="#二-创建py项目" class="headerlink" title="二.创建py项目"></a>二.创建py项目</h1><p><strong>第一步(激活环境)</strong></p>
-<p>进入到先前创建虚拟环境的文件下,进入到scripts文件下,执行指令activate.即可激活环境.</p>
-<pre><code>windows: cd djenv8/Scripts 执行activate/ 用于激活环境  ---- (环境名)+路径 :表示成功激活
-
-Mac/Linux/Ubuntu : 直接执行source activate命令
-
-deactivate/退出虚拟环境
-</code></pre><p>注意:激活activate后路径前面会括号,括号中有虚拟环境名</p>
-<p><img src="https://i.imgur.com/vNlACNx.jpg" alt=""></p>
-<p><strong>第二步(创建py)</strong></p>
-<p>在cmd中回到需要创建py项目的文件夹中,我的文件夹是在e盘下的workspace文件下.</p>
-<pre><code>django-admin startproject day01 / 创建py项目
-</code></pre><p><img src="https://i.imgur.com/jsX3FRT.png" alt=""></p>
-<p>使用pycharm打开创建的项目</p>
-<p>在pycharm/setting/project/project interpreter中 右边齿轮点击add .</p>
-<p>选择Existing environment ,添加先前创建在指定文件e:/env/djenv8 虚拟环境.ok退出,apply 使其生效即可.</p>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动:"></a><strong>启动:</strong></h2><p><strong>打开Terminal:</strong></p>
-<p>启动指令: python manage.py runserver. 默认ip为127.0.0.1 默认端口是8000</p>
-<p>修改启动端口 : python manage.py runserver 端口号</p>
-<p>修改ip和端口: python manage.py runserver ip:端口号</p>
-<p>ip参数:如果为0.0.0.0表示任何人都可以通过公网ip访问Django项目(80端口,隐藏)</p>
-
+        <p>配置路由分发:</p>
+<pre><code>path(&apos;app/&apos;, include(&apos;app.urls&apos;)),
+path(&apos;app/&apos;, include((&apos;app.urls&apos;, &apos;app&apos;)))
+</code></pre><p>接收参数: </p>
+<pre><code>- 接收整型:&lt;int:id&gt;: 其中id参数为int类型
+- 接收字符串:&lt;str: name&gt; :  其中name为str类型
+- 接收uuid:&lt;uuid: uid&gt; : 其中uid参数为uuid类型
+- 接收path: &lt;path:ph&gt; : 其中ph参数为路径
+- re_path:/index/(+d)/ :  正则匹配int整型
+- re_path(&apos;params/(\d+)/(\d+)/(\d+)&apos;): 正则接收多个参数:接收参数的顺序和路由中定义的正则顺序相同
+- re_path(&apos;params/(?P&lt;year&gt;\d+)/(?P&lt;month&gt;\d+)/(?P&lt;day&gt;\d+)&apos;: 正则接收多个参数: 接收参数的顺序和路由定义的正则顺序无关
+- path(&apos;params/&lt;int:year&gt;/&lt;int:month&gt;/&lt;int:day&gt;&apos;, views.params): 接收多个变量&quot;定义多个变量,与路由顺序无关.
+</code></pre>
       
 
       
@@ -226,7 +207,347 @@ deactivate/退出虚拟环境
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/02/虚拟环境安装+创建py项目/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/01/08/Django配置路由分发和接收参数/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Django基础配置(二)" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/07/Django基础配置(二)/">Django 基础配置(二)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/07/Django基础配置(二)/" class="archive-article-date">
+  	<time datetime="2019-01-06T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Django-基础配置-二"><a href="#Django-基础配置-二" class="headerlink" title="Django 基础配置(二)"></a>Django 基础配置(二)</h2><h3 id="一-setting-py文件"><a href="#一-setting-py文件" class="headerlink" title="一.setting.py文件"></a>一.setting.py文件</h3><p>1.添加templates路径</p>
+<pre><code>TEMPLATES = [
+{
+ # 添加 os.path.join(BASE_DIR,&apos;templates&apos;)
+&apos;DIRS&apos;: [os.path.join(BASE_DIR,&apos;templates&apos;)],
+},
+]
+</code></pre><p>2.添加app文件</p>
+<pre><code>INSTALLED_APPS = [
+#添加&apos;app&apos;
+&apos;app&apos;
+]
+</code></pre><p>3.修改DATABASE</p>
+<pre><code>DATABASES = {
+&apos;default&apos;: {
+    &apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
+    &apos;NAME&apos;: &apos;django2&apos;,
+    &apos;HOST&apos;: &apos;127.0.0.1&apos;,
+    &apos;USER&apos;: &apos;root&apos;,
+    &apos;PASSWORD&apos;: &apos;123456&apos;,
+    &apos;PORT&apos;: 3306,
+}
+}
+</code></pre><p>4.添加 os.path.join(BASE_DIR,’static’路径</p>
+<pre><code>STATIC_URL = &apos;/static/&apos;
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,&apos;static&apos;)
+]
+</code></pre><h3 id="二-init文件"><a href="#二-init文件" class="headerlink" title="二.init文件"></a>二.<strong>init</strong>文件</h3><pre><code>import pymysql
+
+pymysql.install_as_MySQLdb()
+</code></pre><h3 id="三-url-py文件"><a href="#三-url-py文件" class="headerlink" title="三.url.py文件"></a>三.url.py文件</h3><p>添加index使用路径:</p>
+<pre><code>from app import views
+
+urlpatterns = [
+    path(&apos;admin/&apos;, admin.site.urls),
+    path(&apos;index/&apos;, views.index),
+]
+</code></pre><h3 id="四-views-py"><a href="#四-views-py" class="headerlink" title="四.views.py"></a>四.views.py</h3><p>添加index 函数    </p>
+<pre><code>def index(request):
+name = &apos;duke&apos;
+return render(request, &apos;index.html&apos;,{&apos;name&apos;: name})
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/07/Django基础配置(二)/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Django关于数据增删改查" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/03/Django关于数据增删改查/">Django的增删改查</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/03/Django关于数据增删改查/" class="archive-article-date">
+  	<time datetime="2019-01-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ORM (objects relationship mapping): 对象关系映射</p>
+<h1 id="Django的增删改查"><a href="#Django的增删改查" class="headerlink" title="Django的增删改查:"></a><strong>Django的增删改查:</strong></h1><h2 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据:"></a>增加数据:</h2><h3 id="插入数据第一种方法"><a href="#插入数据第一种方法" class="headerlink" title="插入数据第一种方法:"></a>插入数据第一种方法:</h3><pre><code>Student.objects.create(s_name=&apos;duke&apos;) 
+</code></pre><h3 id="插入数据的第二种方法"><a href="#插入数据的第二种方法" class="headerlink" title="插入数据的第二种方法:"></a>插入数据的第二种方法:</h3><pre><code>stu = Student()  
+stu.s_name = &apos;马儒&apos;
+stu.s_gender = 1
+stu.save()
+</code></pre><h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据:"></a>删除数据:</h2><pre><code>Student.objects.filter(id=1).delete()
+</code></pre><h2 id="修改-更新-数据"><a href="#修改-更新-数据" class="headerlink" title="修改(更新)数据:"></a>修改(更新)数据:</h2><pre><code>save()方法:模型对象.save()
+update()方法,模型名.objects.filter(条件).update(字段=值)
+save(方法可以改变更新时间)
+</code></pre><h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据:"></a>查询数据:</h2><h4 id="filter-方法-查询满足条件的信息-模型名-objects-filter-条件"><a href="#filter-方法-查询满足条件的信息-模型名-objects-filter-条件" class="headerlink" title="filter()方法         查询满足条件的信息:模型名.objects.filter(条件)"></a>filter()方法         查询满足条件的信息:模型名.objects.filter(条件)</h4><pre><code>stus = Student.objects.filter(s_gender=1)
+</code></pre><h4 id="all-查询所有"><a href="#all-查询所有" class="headerlink" title="all()               查询所有"></a>all()               查询所有</h4><pre><code>stus = Student.objects.all()
+</code></pre><h4 id="get-方法"><a href="#get-方法" class="headerlink" title="get()方法:"></a>get()方法:</h4><h4 id="1-get-取唯一的一个对象"><a href="#1-get-取唯一的一个对象" class="headerlink" title="1.get()取唯一的一个对象"></a>1.get()取唯一的一个对象</h4><h4 id="2-get-条件-条件必须成立"><a href="#2-get-条件-条件必须成立" class="headerlink" title="2.get(条件) 条件必须成立"></a>2.get(条件) 条件必须成立</h4><pre><code>get()取唯一的一个对象
+stu = Student.objects.get(id=2)
+</code></pre><h4 id="exclude-方法-查询出不满足条件的信息-模型名-objects-exclude-条件"><a href="#exclude-方法-查询出不满足条件的信息-模型名-objects-exclude-条件" class="headerlink" title="exclude()方法:       查询出不满足条件的信息:模型名.objects.exclude(条件)"></a>exclude()方法:       查询出不满足条件的信息:模型名.objects.exclude(条件)</h4><pre><code>stus = Student.objects.exclude(s_gender=0)
+</code></pre><h4 id="first-取第一个对象"><a href="#first-取第一个对象" class="headerlink" title="first()             取第一个对象"></a>first()             取第一个对象</h4><pre><code>stu = Student.objects.filter(s_age=20).first()
+</code></pre><h4 id="order-by-方法-排序-默认升序"><a href="#order-by-方法-排序-默认升序" class="headerlink" title="order_by()方法:     排序:默认升序 ;"></a>order_by()方法:     排序:默认升序 ;</h4><h4 id="order-by-‘-‘-降序"><a href="#order-by-‘-‘-降序" class="headerlink" title="order_by(‘-‘)       降序"></a>order_by(‘-‘)       降序</h4><pre><code>stus = Student.objects.order_by(&apos;id&apos;)
+#降序
+stus = Student.objects.order_by(&apos;-id&apos;)
+</code></pre><h4 id="values-方法-取查询对象中的字段"><a href="#values-方法-取查询对象中的字段" class="headerlink" title="values()方法:       取查询对象中的字段"></a>values()方法:       取查询对象中的字段</h4><pre><code>#取出对象中的某个字段
+stus = Student.objects.all().values(&apos;s_name&apos;,&apos;s_age&apos;)
+</code></pre><h4 id="exists-判断查询结果是否村存在-返回True或者False"><a href="#exists-判断查询结果是否村存在-返回True或者False" class="headerlink" title="exists():判断查询结果是否村存在.返回True或者False"></a>exists():判断查询结果是否村存在.返回True或者False</h4><pre><code>#判断查询结果是否存在
+a = Student.objects.filter(s_name=&apos;校长&apos;).exists()
+</code></pre><h4 id="count-计算结果的个数"><a href="#count-计算结果的个数" class="headerlink" title="count():计算结果的个数"></a>count():计算结果的个数</h4><pre><code>b = Student.objects.filter(s_gender=1).count()
+</code></pre><h4 id="pk-主键-相当于id-—pk-in-在什么范围之内"><a href="#pk-主键-相当于id-—pk-in-在什么范围之内" class="headerlink" title="pk:主键 (相当于id)—pk__in=[]:在什么范围之内"></a>pk:主键 (相当于id)—pk__in=[]:在什么范围之内</h4><pre><code>stus = Student.objects.filter(id__in=[1,2,3,4,5,6,7,8])
+print(stus)
+stus = Student.objects.filter(pk__in=[1,2,3,4,5,6,7,8])
+</code></pre><h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><h4 id="contains包含"><a href="#contains包含" class="headerlink" title="contains包含"></a>contains包含</h4><pre><code>c = Student.objects.filter(s_name__contains=&apos;小明&apos;)
+</code></pre><h4 id="startswith-以什么开头"><a href="#startswith-以什么开头" class="headerlink" title="startswith:以什么开头"></a>startswith:以什么开头</h4><h4 id="endswith-以什么结束"><a href="#endswith-以什么结束" class="headerlink" title="endswith:以什么结束"></a>endswith:以什么结束</h4><pre><code>d = Student.objects.filter(s_name__startswith=&apos;小&apos;)
+print(d.values())
+
+e = Student.objects.filter(s_name__endswith=&apos;明&apos;)
+</code></pre><h4 id="gt-gte-lt-lte-大于-大于等于-小于-小于等于"><a href="#gt-gte-lt-lte-大于-大于等于-小于-小于等于" class="headerlink" title="gt; gte ;lt ;lte: 大于 ;大于等于 ;小于 ;小于等于"></a>gt; gte ;lt ;lte: 大于 ;大于等于 ;小于 ;小于等于</h4><pre><code>stus = Student.objects.filter(s_age__gte=18,s_age__lte=20)
+</code></pre><h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><h4 id="from-django-db-models-import-Avg-Count-Min-Max-Sum"><a href="#from-django-db-models-import-Avg-Count-Min-Max-Sum" class="headerlink" title="from django.db.models import Avg, Count, Min, Max, Sum"></a>from django.db.models import Avg, Count, Min, Max, Sum</h4><h4 id="语法-模型名-objects-agrregate-Sum"><a href="#语法-模型名-objects-agrregate-Sum" class="headerlink" title="语法:模型名.objects.agrregate(Sum())"></a>语法:模型名.objects.agrregate(Sum())</h4><pre><code>age_avg = Student.objects.all().aggregate(Avg(&apos;s_age&apos;))
+
+age_avg = Student.objects.all().aggregate(Sum(&apos;s_age&apos;))
+</code></pre><h4 id="Q-与或非"><a href="#Q-与或非" class="headerlink" title="Q: 与或非"></a>Q: 与或非</h4><pre><code>1. 逗号隔开就是与操作,Q()之后可以使用&amp;---与
+2. Q()之后使用 &apos;|&apos;, or -----或
+3. Q()之后使用&apos;~&apos; ------非
+
+stus = Student.objects.filter(Q(s_age__gte=18)|Q(s_age__lt=20))#或
+stus = Student.objects.filter(Q(s_age__gte=18)&amp;Q(s_age__lt=20))#且
+stus = Student.objects.filter(~Q(s_age__gte=18))#取反
+</code></pre><h4 id="F"><a href="#F" class="headerlink" title="F:"></a>F:</h4><h4 id="用于比较两个字段-可使用-符号"><a href="#用于比较两个字段-可使用-符号" class="headerlink" title="用于比较两个字段,可使用+,-符号"></a>用于比较两个字段,可使用+,-符号</h4><h4 id="模型名-objects-filter-physics-gt-F-‘math’-10"><a href="#模型名-objects-filter-physics-gt-F-‘math’-10" class="headerlink" title="模型名.objects.filter(physics__gt = F(‘math’) - 10)"></a>模型名.objects.filter(physics__gt = F(‘math’) - 10)</h4><pre><code>stus = Student.objects.filter(physics__gt= F(&apos;math&apos;))
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/03/Django关于数据增删改查/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Django基础配置(一)" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/02/Django基础配置(一)/">Django基础配置(一)</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/02/Django基础配置(一)/" class="archive-article-date">
+  	<time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Django基础配置-一"><a href="#Django基础配置-一" class="headerlink" title="Django基础配置(一)"></a>Django基础配置(一)</h1><p>创建一个写内容的项目,取名为<br>python manage.py startapp app </p>
+<p><strong>MVT:</strong></p>
+<ol>
+<li>M: models.py,模型层:</li>
+<li>V: views.py, 写业务逻辑的地方</li>
+<li>T: templates,模板,定义页面</li>
+</ol>
+<p>注意: MVT模式是由MVC模式演变出来的.</p>
+<p>MVC模式是所有框架遵循的模式.</p>
+<p><strong>MVC:</strong></p>
+<ol>
+<li>M: 模型层 </li>
+<li>V: 模板,html页面</li>
+<li>C: 业务逻辑层 – controller 写业务逻辑的地方</li>
+</ol>
+<p><strong>一.settings.py中配置</strong></p>
+<pre><code>DATABASES = {
+&apos;default&apos;: {
+&apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
+&apos;NAME&apos;: &apos;dj8&apos;,
+&apos;USER&apos;: &apos;root&apos;,
+&apos;PASSWORD&apos;: &apos;123456&apos;,
+&apos;HOST&apos;: &apos;127.0.0.1&apos;,
+&apos;PORT&apos;: 3306
+}
+}
+</code></pre><p>如果出错,在DATABASE中添加’OPTIONS’:{‘isolation_level’:None}</p>
+<p><strong>二.安装pymysql</strong></p>
+<pre><code>在工程目录的__init__.py文件中 定义 pymysql.install_as_MySQLdb
+</code></pre><p><strong>三.迁移和插入管理员账号</strong></p>
+<pre><code>1. python manage.py migrate 迁移
+2. python manage.py createsuperuser 插入管理员账号
+</code></pre><p><strong>四.如果在model.py中添加了表之后进行迁移</strong></p>
+<pre><code>1. 生成迁移文件 python manage.py makemigrations
+2. 迁移 python manage.py migrate
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/02/Django基础配置(一)/">展开全文 >></a>
         </p>
       
 
@@ -313,6 +634,110 @@ deactivate/退出虚拟环境
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/01/02/Pycharm快捷键/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-虚拟环境安装+创建py项目" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/02/虚拟环境安装+创建py项目/">虚拟环境安装+创建py项目</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/02/虚拟环境安装+创建py项目/" class="archive-article-date">
+  	<time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一-虚拟环境安装"><a href="#一-虚拟环境安装" class="headerlink" title="一.虚拟环境安装"></a><em>一.虚拟环境安装</em></h1><p> <strong>第一步(安装virtualenv):</strong> </p>
+<p>打开命令提示符(cmd)</p>
+<pre><code>pip install virtualenv /安装虚拟环境(pip install  --user virtualenv)
+</code></pre><p> <strong>第二步(创建虚拟环境):</strong><br>指定文件夹下:</p>
+<pre><code>pip virtualenv --no-site-packages -p C:\Program Files\Python37\python.exe djenv8 
+</code></pre><blockquote>
+<p>代码注解:<br>创建虚拟环境文件(–no-site-packages: 表示创建的虚拟环境是纯净的环境,不安装有其他的库)(-p : 表示虚拟环境中的环境参数+虚拟环境名字)</p>
+</blockquote>
+<p><strong>第三步 查看当前安装的库和库的版本</strong></p>
+<p><code>pip list</code> </p>
+<h1 id="二-创建py项目"><a href="#二-创建py项目" class="headerlink" title="二.创建py项目"></a>二.创建py项目</h1><p><strong>第一步(激活环境)</strong></p>
+<p>进入到先前创建虚拟环境的文件下,进入到scripts文件下,执行指令activate.即可激活环境.</p>
+<pre><code>windows: cd djenv8/Scripts 执行activate/ 用于激活环境  ---- (环境名)+路径 :表示成功激活
+
+Mac/Linux/Ubuntu : 直接执行source activate命令
+
+deactivate/退出虚拟环境
+</code></pre><p>注意:激活activate后路径前面会括号,括号中有虚拟环境名</p>
+<p><img src="https://i.imgur.com/vNlACNx.jpg" alt=""></p>
+<p><strong>第二步(创建py)</strong></p>
+<p>在cmd中回到需要创建py项目的文件夹中,我的文件夹是在e盘下的workspace文件下.</p>
+<pre><code>django-admin startproject day01 / 创建py项目
+</code></pre><p><img src="https://i.imgur.com/jsX3FRT.png" alt=""></p>
+<p>使用pycharm打开创建的项目</p>
+<p>在pycharm/setting/project/project interpreter中 右边齿轮点击add .</p>
+<p>选择Existing environment ,添加先前创建在指定文件e:/env/djenv8 虚拟环境.ok退出,apply 使其生效即可.</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动:"></a><strong>启动:</strong></h2><p><strong>打开Terminal:</strong></p>
+<p>启动指令: python manage.py runserver. 默认ip为127.0.0.1 默认端口是8000</p>
+<p>修改启动端口 : python manage.py runserver 端口号</p>
+<p>修改ip和端口: python manage.py runserver ip:端口号</p>
+<p>ip参数:如果为0.0.0.0表示任何人都可以通过公网ip访问Django项目(80端口,隐藏)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/02/虚拟环境安装+创建py项目/">展开全文 >></a>
         </p>
       
 
@@ -669,297 +1094,9 @@ deactivate/退出虚拟环境
 
 
   
-    <article id="post-html" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/22/html/">HTML学习</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/22/html/" class="archive-article-date">
-  	<time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="html标签"><a href="#html标签" class="headerlink" title="html标签"></a>html标签</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">div span标签: div是块标签 span是行内标签</span><br><span class="line">select标签:</span><br><span class="line">	下拉菜单</span><br><span class="line">	select optgroup option</span><br><span class="line">from标签:</span><br><span class="line">	action=<span class="string">"接口地址"</span> methd=<span class="string">"get/post接口方式"</span> </span><br><span class="line">input标签:</span><br><span class="line">	<span class="built_in">type</span>属性: 不同功能</span><br><span class="line">			text 文本输入框</span><br><span class="line">			password 密码输入框</span><br><span class="line">			datetime-local 时间框</span><br></pre></td></tr></table></figure>
-<h3 id="html引入css样式表三种方式"><a href="#html引入css样式表三种方式" class="headerlink" title="html引入css样式表三种方式"></a>html引入css样式表三种方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">内联样式表</span><br><span class="line">	:在标签内使用style属性改变单个标签样式</span><br><span class="line">外部样式表</span><br><span class="line">	:使用link stylesheet模式 导入外部css文件,来改变html的样式</span><br><span class="line">内部样式表</span><br><span class="line">	:style标签 改变所在html文件样式.</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">HTML相关学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/22/html/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-js" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">DOM - Document object model  文档对象模型</span><br><span class="line">获取子节点:</span><br><span class="line">	children 获取全部子节点</span><br><span class="line">	childrenNode 获取子节点和内容</span><br><span class="line">返回父节点: </span><br><span class="line">	parentNode()</span><br><span class="line">添加子节点: </span><br><span class="line">	appendChild() 和 insertBefore()</span><br><span class="line">删除节点: </span><br><span class="line">	remove(): 删除自己 </span><br><span class="line">	removeChild(): 删除指定子标签</span><br><span class="line">克隆节点:</span><br><span class="line">	cloneNode : 克隆节点</span><br><span class="line">替换节点 :</span><br><span class="line">	父节点.replaceChild(新节点,旧节点)</span><br></pre></td></tr></table></figure>
-<h3 id="BOM的三种弹窗"><a href="#BOM的三种弹窗" class="headerlink" title="BOM的三种弹窗"></a>BOM的三种弹窗</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">alert(内容) :</span><br><span class="line"> 	弹出指定内容的警告框,确定按钮后关闭</span><br><span class="line">confirm(内容):</span><br><span class="line">	弹出内容的窗口 ,确定返回<span class="literal">true</span>,取消<span class="literal">false</span></span><br><span class="line">prompt(输入框标题,输入框默认值):</span><br><span class="line">	确认返回值为 输入框内容 ,取消则为null</span><br></pre></td></tr></table></figure>
-<h3 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">一.jQuery: 是js的一个外部库,使用之前必须要添加.</span><br><span class="line">1.jq对象都使用$(<span class="string">""</span>)来表示:</span><br><span class="line">2.对象的增 删 改 查 .</span><br><span class="line">	1.获取标签</span><br><span class="line">	$(<span class="string">''</span>) </span><br><span class="line">		<span class="comment">#A - id为A的标签</span></span><br><span class="line">		.A - class名为A的标签</span><br><span class="line">		B&gt;A - B所有子类标签为A的标签</span><br><span class="line">		B+A - 紧跟B的A标签</span><br><span class="line">		B-A - B后面的同级标签A</span><br><span class="line">						</span><br><span class="line">		:first - 第一个标签</span><br><span class="line">		:last - 最后一个标签</span><br><span class="line">	 B A:first-child - B标签里的第一个A标签</span><br><span class="line">		:gt(n) 第n个后面的标签</span><br><span class="line">			 </span><br><span class="line">	2.添加标签	 </span><br><span class="line">		父标签.append(子标签)</span><br><span class="line">				添加子标签 添加到父标签最后</span><br><span class="line">		父标签.prepend(子标签)</span><br><span class="line">				添加子标签 添加到父标签最前面</span><br><span class="line">		标签1.before(标签2)</span><br><span class="line">				添加标签2在标签1之前</span><br><span class="line">		标签1.after(标签2)</span><br><span class="line">				添加标签2在标签1之后</span><br><span class="line">					</span><br><span class="line">					</span><br><span class="line">	3.删除标签</span><br><span class="line">		标签1.empty()</span><br><span class="line">				清空标签1中所有的子标签</span><br><span class="line">		标签1.remove()</span><br><span class="line">				删除所有的标签1</span><br><span class="line">					</span><br><span class="line">					</span><br><span class="line">	4.拷贝和替换:</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">	5.属性和样式:</span><br><span class="line">			标签.attr(属性名)  - 获取属性值(只获取被选中标签中的第一个标签)</span><br><span class="line">				</span><br><span class="line">			标签.attr(属性名,值) - 修改/添加(会修改添加所有的标签)</span><br><span class="line">				</span><br><span class="line">	6.标签内容属性:</span><br><span class="line">			注意:不传参就是获取值, 传参就是改变值</span><br><span class="line">			标签.text() - 标签内容的文本部分</span><br><span class="line">			标签.html() - 标签所有内容</span><br><span class="line">			标签.val() - 单标签的value属性</span><br><span class="line">			</span><br><span class="line">	7.class属性</span><br><span class="line">			.addClass() 添加class属性值</span><br><span class="line">			.removeClass() 删除指定的class属性值</span><br><span class="line">			多个class值用空格隔开</span><br><span class="line">			</span><br><span class="line">	8.样式属性</span><br><span class="line">			 标签.css(样式属性名) - 获取样式属性值</span><br><span class="line">			 </span><br><span class="line">			 标签.css(样式属性名,值)</span><br><span class="line">			</span><br><span class="line">			标签.css(&#123;</span><br><span class="line">				<span class="string">'属性名'</span>: <span class="string">'值'</span>,</span><br><span class="line">				<span class="string">'属性名1'</span> : <span class="string">'值1'</span></span><br><span class="line">			&#125;)</span><br><span class="line">			</span><br><span class="line">	9.事件</span><br><span class="line">			a.标签.on(事件名,回调函数) - 给标签绑定指定的事件 事件名不需要on</span><br><span class="line">			b.标签.on(事件名,选择器,回调函数)) </span><br><span class="line">			选择器 - 前面标签的后代标签(子标签/子标签的子标签)</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/22/js/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ok" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/21/ok/">git远程仓库 ssh秘钥 服务器问题</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/21/ok/" class="archive-article-date">
-  	<time datetime="2018-12-21T02:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="主体"><a href="#主体" class="headerlink" title="主体"></a>主体</h3><p>关联方法1:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;url&gt; 关联远程仓库</span><br></pre></td></tr></table></figure></p>
-<p>关联方法2:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 地址 关联远程仓库(只需关联一次)</span><br><span class="line">git push  -u origin master 第一次推送消息 </span><br><span class="line">git push 后面只用push.</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">拉取远程库的信息: </span><br><span class="line">	git pull</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">生成SSH  秘钥:</span><br><span class="line">	ssh-keygen</span><br><span class="line">连接虚拟器: </span><br><span class="line">	ssh root@虚拟机公共ip</span><br><span class="line">在本地传递文件到虚拟机上:</span><br><span class="line">	$ scp hah.rar root@120.79.219.2:/home/duke/temp.zip</span><br><span class="line">启动nginx :</span><br><span class="line">	systemctl restart nginx</span><br><span class="line">解压文件指令:</span><br><span class="line">	</span><br><span class="line">	tar -xvf file.tar //解压 tar包</span><br><span class="line"></span><br><span class="line">	tar zxvf  MY_NAME.tar.gz 解压.tar.gz文件在当前目录</span><br><span class="line">	</span><br><span class="line">	tar zxvf  MY_NAME.tgz 解压.tgz文件在当前目录</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/21/ok/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-web" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/21/web/">my website</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/21/web/" class="archive-article-date">
-  	<time datetime="2018-12-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>More info: <a href="http://120.79.219.2/" target="_blank" rel="noopener">Duke’s web</a></p>
-<p><a href="http://120.79.219.2/" target="_blank" rel="noopener">Duke’s web</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">我的个人网站</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/21/web/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1058,6 +1195,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Flask</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">css学习</a>
               </li>
              
@@ -1074,15 +1219,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">我的个人网站</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">tools</a>
+                <a href="javascript:void(0)" class="js-tag color2">我的个人网站</a>
               </li>
             
             <div class="clearfix"></div>

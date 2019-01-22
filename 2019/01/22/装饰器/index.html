@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Django基础配置(一) | Duke&#39;s Blog</title>
+  <title>装饰器 | Duke&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
-<meta name="keywords" content="Django">
+  <meta name="description" content="一.装饰器 如果有参数传入,所以需要内层函数需要(* args,**kwargs)">
+<meta name="keywords" content="Flask">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django基础配置(一)">
-<meta property="og:url" content="http://yoursite.com/2019/01/02/Django基础配置(一)/index.html">
+<meta property="og:title" content="装饰器">
+<meta property="og:url" content="http://yoursite.com/2019/01/22/装饰器/index.html">
 <meta property="og:site_name" content="Duke&#39;s Blog">
-<meta property="og:description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
+<meta property="og:description" content="一.装饰器 如果有参数传入,所以需要内层函数需要(* args,**kwargs)">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-02T08:48:28.000Z">
+<meta property="og:image" content="https://i.imgur.com/acXTIjY.png">
+<meta property="og:updated_time" content="2019-01-22T04:21:40.750Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django基础配置(一)">
-<meta name="twitter:description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
+<meta name="twitter:title" content="装饰器">
+<meta name="twitter:description" content="一.装饰器 如果有参数传入,所以需要内层函数需要(* args,**kwargs)">
+<meta name="twitter:image" content="https://i.imgur.com/acXTIjY.png">
   
     <link rel="alternative" href="/atom.xml" title="Duke&#39;s Blog" type="application/atom+xml">
   
@@ -155,62 +157,30 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Django基础配置(一)" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-装饰器" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Django基础配置(一)
+      装饰器
     </h1>
   
 
         
-        <a href="/2019/01/02/Django基础配置(一)/" class="archive-article-date">
-  	<time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
+        <a href="/2019/01/22/装饰器/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Django基础配置-一"><a href="#Django基础配置-一" class="headerlink" title="Django基础配置(一)"></a>Django基础配置(一)</h1><p>创建一个写内容的项目,取名为<br>python manage.py startapp app </p>
-<p><strong>MVT:</strong></p>
-<ol>
-<li>M: models.py,模型层:</li>
-<li>V: views.py, 写业务逻辑的地方</li>
-<li>T: templates,模板,定义页面</li>
-</ol>
-<p>注意: MVT模式是由MVC模式演变出来的.</p>
-<p>MVC模式是所有框架遵循的模式.</p>
-<p><strong>MVC:</strong></p>
-<ol>
-<li>M: 模型层 </li>
-<li>V: 模板,html页面</li>
-<li>C: 业务逻辑层 – controller 写业务逻辑的地方</li>
-</ol>
-<p><strong>一.settings.py中配置</strong></p>
-<pre><code>DATABASES = {
-&apos;default&apos;: {
-&apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
-&apos;NAME&apos;: &apos;dj8&apos;,
-&apos;USER&apos;: &apos;root&apos;,
-&apos;PASSWORD&apos;: &apos;123456&apos;,
-&apos;HOST&apos;: &apos;127.0.0.1&apos;,
-&apos;PORT&apos;: 3306
-}
-}
-</code></pre><p>如果出错,在DATABASE中添加’OPTIONS’:{‘isolation_level’:None}</p>
-<p><strong>二.安装pymysql</strong></p>
-<pre><code>在工程目录的__init__.py文件中 定义 pymysql.install_as_MySQLdb
-</code></pre><p><strong>三.迁移和插入管理员账号</strong></p>
-<pre><code>1. python manage.py migrate 迁移
-2. python manage.py createsuperuser 插入管理员账号
-</code></pre><p><strong>四.如果在model.py中添加了表之后进行迁移</strong></p>
-<pre><code>1. 生成迁移文件 python manage.py makemigrations
-2. 迁移 python manage.py migrate
-</code></pre>
+        <p>一.装饰器</p>
+<p>如果有参数传入,所以需要内层函数需要(* args,**kwargs)</p>
+<p><img src="https://i.imgur.com/acXTIjY.png" alt=""></p>
+
       
 
       
@@ -249,7 +219,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
         		</li>
       		
 		</ul>
@@ -305,7 +275,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/02/Django基础配置(一)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/22/装饰器/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -319,18 +289,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/01/03/Django关于数据增删改查/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/01/22/session的使用/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Django的增删改查
+          session的使用
         
       </div>
     </a>
   
   
-    <a href="/2019/01/02/Pycharm快捷键/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Pycharm快捷键</div>
+    <a href="/2019/01/18/git指令/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git指令</div>
       <i class="icon-circle-right"></i>
     </a>
   

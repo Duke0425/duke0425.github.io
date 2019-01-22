@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Django基础配置(一) | Duke&#39;s Blog</title>
+  <title>session的使用 | Duke&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
-<meta name="keywords" content="Django">
+  <meta name="description" content="一.session的使用1.flask自带形式存储形式:将session中存储键值对内容存放在cookie中 存储方式:设置secret_key参数,越复杂越好 使用方式: from flask import session session[&amp;apos;key&amp;apos;] = value 2.使用第三方库和flask-session(1)安装: pip install flask-session">
+<meta name="keywords" content="Flask">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django基础配置(一)">
-<meta property="og:url" content="http://yoursite.com/2019/01/02/Django基础配置(一)/index.html">
+<meta property="og:title" content="session的使用">
+<meta property="og:url" content="http://yoursite.com/2019/01/22/session的使用/index.html">
 <meta property="og:site_name" content="Duke&#39;s Blog">
-<meta property="og:description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
+<meta property="og:description" content="一.session的使用1.flask自带形式存储形式:将session中存储键值对内容存放在cookie中 存储方式:设置secret_key参数,越复杂越好 使用方式: from flask import session session[&amp;apos;key&amp;apos;] = value 2.使用第三方库和flask-session(1)安装: pip install flask-session">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-02T08:48:28.000Z">
+<meta property="og:updated_time" content="2019-01-22T04:22:37.770Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Django基础配置(一)">
-<meta name="twitter:description" content="Django基础配置(一)创建一个写内容的项目,取名为python manage.py startapp app  MVT:  M: models.py,模型层: V: views.py, 写业务逻辑的地方 T: templates,模板,定义页面  注意: MVT模式是由MVC模式演变出来的. MVC模式是所有框架遵循的模式. MVC:  M: 模型层  V: 模板,html页面 C: 业务逻辑">
+<meta name="twitter:title" content="session的使用">
+<meta name="twitter:description" content="一.session的使用1.flask自带形式存储形式:将session中存储键值对内容存放在cookie中 存储方式:设置secret_key参数,越复杂越好 使用方式: from flask import session session[&amp;apos;key&amp;apos;] = value 2.使用第三方库和flask-session(1)安装: pip install flask-session">
   
     <link rel="alternative" href="/atom.xml" title="Duke&#39;s Blog" type="application/atom+xml">
   
@@ -155,61 +155,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Django基础配置(一)" class="article article-type-post " itemscope="" itemprop="blogPost">
+            <article id="post-session的使用" class="article article-type-post " itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Django基础配置(一)
+      session的使用
     </h1>
   
 
         
-        <a href="/2019/01/02/Django基础配置(一)/" class="archive-article-date">
-  	<time datetime="2019-01-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-02</time>
+        <a href="/2019/01/22/session的使用/" class="archive-article-date">
+  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Django基础配置-一"><a href="#Django基础配置-一" class="headerlink" title="Django基础配置(一)"></a>Django基础配置(一)</h1><p>创建一个写内容的项目,取名为<br>python manage.py startapp app </p>
-<p><strong>MVT:</strong></p>
-<ol>
-<li>M: models.py,模型层:</li>
-<li>V: views.py, 写业务逻辑的地方</li>
-<li>T: templates,模板,定义页面</li>
-</ol>
-<p>注意: MVT模式是由MVC模式演变出来的.</p>
-<p>MVC模式是所有框架遵循的模式.</p>
-<p><strong>MVC:</strong></p>
-<ol>
-<li>M: 模型层 </li>
-<li>V: 模板,html页面</li>
-<li>C: 业务逻辑层 – controller 写业务逻辑的地方</li>
-</ol>
-<p><strong>一.settings.py中配置</strong></p>
-<pre><code>DATABASES = {
-&apos;default&apos;: {
-&apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,
-&apos;NAME&apos;: &apos;dj8&apos;,
-&apos;USER&apos;: &apos;root&apos;,
-&apos;PASSWORD&apos;: &apos;123456&apos;,
-&apos;HOST&apos;: &apos;127.0.0.1&apos;,
-&apos;PORT&apos;: 3306
-}
-}
-</code></pre><p>如果出错,在DATABASE中添加’OPTIONS’:{‘isolation_level’:None}</p>
-<p><strong>二.安装pymysql</strong></p>
-<pre><code>在工程目录的__init__.py文件中 定义 pymysql.install_as_MySQLdb
-</code></pre><p><strong>三.迁移和插入管理员账号</strong></p>
-<pre><code>1. python manage.py migrate 迁移
-2. python manage.py createsuperuser 插入管理员账号
-</code></pre><p><strong>四.如果在model.py中添加了表之后进行迁移</strong></p>
-<pre><code>1. 生成迁移文件 python manage.py makemigrations
-2. 迁移 python manage.py migrate
+        <h2 id="一-session的使用"><a href="#一-session的使用" class="headerlink" title="一.session的使用"></a>一.session的使用</h2><h3 id="1-flask自带形式"><a href="#1-flask自带形式" class="headerlink" title="1.flask自带形式"></a>1.flask自带形式</h3><pre><code>存储形式:将session中存储键值对内容存放在cookie中
+存储方式:设置secret_key参数,越复杂越好
+使用方式:
+from flask import session
+session[&apos;key&apos;] = value
+</code></pre><h3 id="2-使用第三方库和flask-session"><a href="#2-使用第三方库和flask-session" class="headerlink" title="2.使用第三方库和flask-session"></a>2.使用第三方库和flask-session</h3><p>(1)安装:</p>
+<pre><code>pip install flask-session
+</code></pre><p>(2)配置存储的数据库</p>
+<pre><code>flask对象.config[&apos;SESSION_TYPE&apos;] = &apos;redis&apos;
+flask对象.config[&apos;SESSION_REDIS&apos;] = redis.Redis(host,port,password)
+</code></pre><p>(3)初始化:</p>
+<pre><code>from flask-session import session
+第一种:
+Session(flask对象)
+第二种:
+se = Session()
+se.init_app(flask对象)
 </code></pre>
       
 
@@ -249,7 +231,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
         		</li>
       		
 		</ul>
@@ -305,7 +287,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/02/Django基础配置(一)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/22/session的使用/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -319,18 +301,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/01/03/Django关于数据增删改查/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/01/22/Flask(路由-请求响应)/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Django的增删改查
+          Flask(路由-请求响应)
         
       </div>
     </a>
   
   
-    <a href="/2019/01/02/Pycharm快捷键/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Pycharm快捷键</div>
+    <a href="/2019/01/22/装饰器/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">装饰器</div>
       <i class="icon-circle-right"></i>
     </a>
   
