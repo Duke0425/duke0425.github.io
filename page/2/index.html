@@ -152,6 +152,120 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MiddleWare" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/09/MiddleWare/">中间件</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/09/MiddleWare/" class="archive-article-date">
+  	<time datetime="2019-01-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-什么是中间件"><a href="#一-什么是中间件" class="headerlink" title="一.什么是中间件?"></a>一.什么是中间件?</h3><p>官方的说法：中间件是一个用来处理Django的请求和响应的框架级别的钩子。它是一个轻量、低级别的插件系统，用于在全局范围内改变Django的输入和输出。每个中间件组件都负责做一些特定的功能。</p>
+<p>但是由于其影响的是全局，所以需要谨慎使用，使用不当会影响性能。</p>
+<p>说的直白一点中间件是帮助我们在视图函数执行之前和执行之后都可以做一些额外的操作，它本质上就是一个自定义类，类中定义了几个方法，Django框架会在请求的特定的时间去执行这些方法。</p>
+<p>我们一直都在使用中间件，只是没有注意到而已，打开Django项目的Settings.py文件，看到下图的MIDDLEWARE配置项</p>
+<p><img src="https://i.imgur.com/pdplgLF.png" alt=""></p>
+<h3 id="二-中间件-Middleware-分类"><a href="#二-中间件-Middleware-分类" class="headerlink" title="二.中间件(Middleware)分类:"></a>二.中间件(Middleware)分类:</h3><pre><code>1、process_request(self,request):
+
+2、process_view(self, request, view_func, view_args, view_kwargs)
+
+3、process_template_respons(self,request,response)
+
+4、process_exception(self, request, exception)
+
+5、process_response(self, request, response)
+</code></pre><h3 id="三-怎么写中间件"><a href="#三-怎么写中间件" class="headerlink" title="三.怎么写中间件:"></a>三.怎么写中间件:</h3><pre><code>class TestMiddleware1(MiddlewareMixin):
+    #process_request是在请求之前调用
+    def process_request(self, request):
+        print(&apos;test1 process request&apos;)
+        # 对所有的请求进行登录状态的校验
+        path = request.path
+        if path in [&apos;/user/register/&apos;, &apos;/user/login/&apos;,&apos;/user/my_login/&apos;]:
+            # 跳过以下所有代码,直接访问路由对应的视图函数
+            return None
+        user_id = request.session.get(&apos;user_id&apos;)
+        if not user_id:
+            return HttpResponseRedirect(reverse(&apos;user:my_login&apos;))
+        user = User.objects.get(pk=user_id)
+        request.user = user
+        return None
+
+
+    #process_view    
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        print(&apos;test1 view&apos;)
+
+
+    #process_response响应之前调用,并且必须return HttpResponse
+    def process_response(self, request,response):
+        print(&apos;test1 process response&apos;)
+        return response    
+</code></pre><h3 id="四-中间件五个方法的执行方向"><a href="#四-中间件五个方法的执行方向" class="headerlink" title="四.中间件五个方法的执行方向"></a>四.中间件五个方法的执行方向</h3><p><img src="https://i.imgur.com/I9lU3vC.png" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/09/MiddleWare/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Django配置路由分发和接收参数" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -987,84 +1101,6 @@ deactivate/退出虚拟环境
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/12/22/css/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-display" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/22/display/">css属性</a>
-    </h1>
-  
-
-        
-        <a href="/2018/12/22/display/" class="archive-article-date">
-  	<time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">转换标签</span><br><span class="line">block 块</span><br><span class="line">inline 行内</span><br><span class="line">inline-block 行内块</span><br><span class="line">行内标签: 一行多个 不可设置宽高</span><br><span class="line">块标签: 独占一行 可以设置宽高</span><br><span class="line">行内块标签: 一行多个且可设置宽高</span><br></pre></td></tr></table></figure>
-<h3 id="float"><a href="#float" class="headerlink" title="float"></a>float</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">脱离标准流</span><br><span class="line"><span class="built_in">float</span> : 浮动</span><br><span class="line">	对齐方式:</span><br><span class="line">		left</span><br><span class="line">		right</span><br><span class="line">一.高度塌陷:</span><br><span class="line"></span><br><span class="line">	1.添加 空div</span><br><span class="line">		&lt;div style=<span class="string">"clear: both;"</span>&gt;</span><br><span class="line">	2.塌陷的标签添加属性overflow</span><br><span class="line">		style=<span class="string">"overflow; hidden"</span></span><br><span class="line">二.文字环绕:</span><br><span class="line">	图片浮动而文字不浮动即可</span><br></pre></td></tr></table></figure>
-<h3 id="position"><a href="#position" class="headerlink" title="position"></a>position</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">position定位:</span><br><span class="line">	absolute:</span><br><span class="line">		绝对定位 参照物为不是initial和static的父标签</span><br><span class="line"></span><br><span class="line">	relative:</span><br><span class="line">		相对定位 参照position属性值为 relative的父标签</span><br><span class="line">		如果没有 则是参照自己的标准流定位</span><br><span class="line">	fixed:</span><br><span class="line">		相对浏览器进行定位</span><br><span class="line">	sticky:</span><br><span class="line">		粘性的定位 网页能够下滑时,则相对浏览器定位</span><br><span class="line">		否则相对标准流定位.</span><br></pre></td></tr></table></figure>
-<h3 id="标签盒子"><a href="#标签盒子" class="headerlink" title="标签盒子"></a>标签盒子</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">所有可见的标签都是由 :</span><br><span class="line">	cotent:</span><br><span class="line">		 宽高 和背景颜色</span><br><span class="line">	padding:</span><br><span class="line">		边线和内容之间的填充物 设置background-color会改变padding的值</span><br><span class="line">	 border :</span><br><span class="line">		值:大小 类型 颜色</span><br><span class="line">	 margin(不可见的):</span><br><span class="line">		不可见但是是占位的.</span><br></pre></td></tr></table></figure>
-<h3 id="其他属性"><a href="#其他属性" class="headerlink" title="其他属性"></a>其他属性</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">行高:</span><br><span class="line">	line-height:</span><br><span class="line">内容对齐方式:</span><br><span class="line">	text-align</span><br><span class="line">字体加粗方式:</span><br><span class="line">	font-weight:(100-900) 500为正常</span><br><span class="line">字体倾斜方式:</span><br><span class="line">	font-style:italic 文字倾斜</span><br><span class="line">文字装饰器:</span><br><span class="line">	text-decoration: underline 下划线</span><br><span class="line">			overline 上划线</span><br><span class="line">首行缩进;</span><br><span class="line">	text-indent:  2em or 2px</span><br><span class="line">文字间距:</span><br><span class="line">	letter-spacing: 像素和空格</span><br><span class="line">背景图:</span><br><span class="line">	background: url(图像地址) no-reaped position-x positiony center(是否居中) rgba()背景颜色 ;</span><br><span class="line">序列:</span><br><span class="line">	list-style-type: circle;</span><br><span class="line">	list-style-image:将图片作为圆点</span><br><span class="line">	list-style-position:inside; 圆点所在位置</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">css学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/12/22/display/">展开全文 >></a>
         </p>
       
 
