@@ -152,6 +152,235 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Flask关联模型" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/24/Flask关联模型/">Flask关联模型</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/24/Flask关联模型/" class="archive-article-date">
+  	<time datetime="2019-01-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Flask关联模型"><a href="#Flask关联模型" class="headerlink" title="Flask关联模型:"></a>Flask关联模型:</h1><h2 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h2><pre><code>定义外键字段, db.ForeignKey(&apos;关联表名.id&apos;)
+
+关联字段 db.relationship(&apos;关联的模型名&apos;,backref=&apos;反向引用参数&apos;)
+
+重点:relationship定义的字段,可以放在任何一个模型中
+</code></pre><h2 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h2><pre><code>定义外键是通过中间表,db.Table(表名,字段)
+
+关联字段 db.relationship(&apos;关联的模型名&apos;,secondary=&apos;中间表&apos;,backref=&apos;反向应用参数&apos;)
+
+重点:relationship定义的字段,可以放在任何一个模型中
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/24/Flask关联模型/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Flask模型和数据库的增删改查" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/24/Flask模型和数据库的增删改查/">Flask的模型和数据库的增删改查</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/24/Flask模型和数据库的增删改查/" class="archive-article-date">
+  	<time datetime="2019-01-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-Flask的模型"><a href="#一-Flask的模型" class="headerlink" title="一.Flask的模型"></a>一.Flask的模型</h2><pre><code>安装Flask-SQLAlchemy
+
+pip install sqlalchemy
+</code></pre><h3 id="1-在models-py中定义"><a href="#1-在models-py中定义" class="headerlink" title="(1)在models.py中定义:"></a>(1)在models.py中定义:</h3><pre><code>db = SQLAlchemy()
+</code></pre><h3 id="2-在manage-py中"><a href="#2-在manage-py中" class="headerlink" title="(2)在manage.py中:"></a>(2)在manage.py中:</h3><pre><code>app.config[&apos;SQLALCHEMY_DATABASE_URI&apos;] = &apos;mysql+pymysql://root:123456@127.0.0.1:3306/flask8&apos;
+app.config[&apos;SQLALCHEMY_TRACK_MODIFICATIONS&apos;] = False
+db.init_app(app)    
+</code></pre><h2 id="二-Flask数据库的增删改查"><a href="#二-Flask数据库的增删改查" class="headerlink" title="二.Flask数据库的增删改查:"></a>二.Flask数据库的增删改查:</h2><h3 id="1-增"><a href="#1-增" class="headerlink" title="1.增"></a>1.增</h3><pre><code>增加学生信息
+db.session.add(stu)
+sb.session.commit()
+批量增加学生信息
+db.session.add_all(stus)
+db.session.commit()
+</code></pre><h3 id="2-删"><a href="#2-删" class="headerlink" title="2.删"></a>2.删</h3><pre><code>db.session.delete(stu)
+db.session.commit()
+</code></pre><h3 id="3-改"><a href="#3-改" class="headerlink" title="3.改"></a>3.改</h3><pre><code>db.session.add(stu) : 更新内容可以不写
+db.session.commit()
+</code></pre><h3 id="4-查"><a href="#4-查" class="headerlink" title="4.查"></a>4.查</h3><pre><code>三种查询主键的方式:
+Student.query.filter(Student.id == 1).first()
+stu = Student.query.filter_by(id=1).first()
+stu = Student.query.get(1)
+
+查询第一个对象:
+stu1 = Student.query.all()[0]
+stu2 = Student.query.first()
+</code></pre><h3 id="1-排序"><a href="#1-排序" class="headerlink" title="(1)排序"></a>(1)排序</h3><pre><code>order_by(&apos;-id&apos;) :表示安装id的降序排数据
+order_by(&apos;id&apos;) :表示安装id的升序排数据
+</code></pre><h3 id="2-分页"><a href="#2-分页" class="headerlink" title="(2)分页"></a>(2)分页</h3><pre><code>方法1(切片):
+stus = Student.query.all()[:4]
+方法2:
+offset(m).limit(n):表示跳过m个参数,截取n个参数
+</code></pre><h3 id="3-比较符号"><a href="#3-比较符号" class="headerlink" title="(3)比较符号"></a>(3)比较符号</h3><pre><code>gt ge lt le : 大于 大于等于 小于 小于等于
+stus = Student.query.filter(Student.s_age.__gt__(30)).all()
+
+第二种(直接使用&gt; &lt; &gt;= &lt;= ):
+stus = Student.query.filter(Student.s_age &gt; 30).all()
+</code></pre><h3 id="4-模糊查询"><a href="#4-模糊查询" class="headerlink" title="(4)模糊查询"></a>(4)模糊查询</h3><pre><code>包含查询:
+stus = Student.query.filter(Student.s_name.contains(&apos;d&apos;)).all()
+
+以什么开头:
+stus = Student.query.filter(Student.s_name.startswith(&apos;p&apos;)).all()
+
+以什么结尾:
+stus = Student.query.filter(Student.s_name.endswith(&apos;e&apos;)).all()
+
+模糊查询(&apos;_&apos; 匹配一位,&apos;%&apos; 匹配任意长度的数据):
+stus = Student.query.filter(Student.s_name.like(&apos;__a%&apos;)).all()
+</code></pre><h3 id="5-多条件查询"><a href="#5-多条件查询" class="headerlink" title="(5)多条件查询"></a>(5)多条件查询</h3><pre><code>且:
+    1.链式结构查询:
+    stus = Student.query.filter(Student.s_name.contains(&apos;e&apos;)).filter(Student.s_age &gt; 35).all()
+
+    2._and方法或者,号隔开
+    stus = Student.query.filter(and_(Student.s_name.contains(&apos;e&apos;), Student.s_age &gt; 35)).all()
+    stus = Student.query.filter(Student.s_name.contains(&apos;e&apos;), Student.s_age &gt; 35).all()
+或:
+    or_方法:
+    stus = Student.query.filter(or_(Student.s_name.contains(&apos;e&apos;), Student.s_age &gt; 35)).all()
+
+非:
+    not_方法:
+    stus = Student.query.filter( not_(Student.s_name.contains(&apos;e&apos;) )).all()
+</code></pre><h3 id="6-分页"><a href="#6-分页" class="headerlink" title="(6)分页"></a>(6)分页</h3><pre><code>第一种方法(切片):
+
+第二种方法(limit offset):
+
+第三种方法(paginate):
+    has_prev/has_next 是否有上一页/下一页
+
+    prev_num/next_num 上一页/下一页 的页码
+
+    page:当前页码 pages:总页数
+
+    循环取页码 iter_pages()
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/24/Flask模型和数据库的增删改查/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Flask(安装-管理-蓝图)" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
@@ -986,230 +1215,6 @@ def render(self, data, accepted_media_type=None, renderer_context=None):
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/01/10/DjangoRESTFrameWork/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Log" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/10/Log/">日志</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/10/Log/" class="archive-article-date">
-  	<time datetime="2019-01-09T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-setting-py文件中配置log"><a href="#一-setting-py文件中配置log" class="headerlink" title="一.setting.py文件中配置log:"></a>一.setting.py文件中配置log:</h2><pre><code># 配置日志
-LOG_PATH = os.path.join(BASE_DIR, &apos;log&apos;)
-LOGGING = {
-    &apos;version&apos;: 1 ,
-    # 禁用日志:False
-    &apos;disable_existing_logger&apos;: False,
-    &apos;formatters&apos;: {
-        &apos;default&apos;: {
-            &apos;format&apos;: &apos;%(asctime)s %(message)s&apos;
-        },
-        &apos;simple&apos;: {
-            &apos;format&apos;: &apos;%(message)s&apos;
-        }
-    },
-    #  接收日志,并且交于console的处理handlers去处理
-    &apos;loggers&apos;: {
-        &apos;&apos;: {
-            &apos;handlers&apos;: [&apos;console&apos;],
-            &apos;level&apos;: &apos;INFO&apos;
-        }
-    },
-    &apos;handlers&apos;: {
-        &apos;console&apos;: {
-            &apos;level&apos;: &apos;INFO&apos;,
-            &apos;filename&apos;: &apos;%s/sys.log&apos; % LOG_PATH,
-            &apos;formatter&apos;: &apos;default&apos;,
-            &apos;class&apos;: &apos;logging.handlers.RotatingFileHandler&apos;,
-            &apos;maxBytes&apos;: 5 * 1024 * 1024
-        }
-    }
-}
-</code></pre><h2 id="二-在根目录下新建一个log文件夹"><a href="#二-在根目录下新建一个log文件夹" class="headerlink" title="二.在根目录下新建一个log文件夹"></a>二.在根目录下新建一个log文件夹</h2><h2 id="三-在中间件中添加log的类"><a href="#三-在中间件中添加log的类" class="headerlink" title="三.在中间件中添加log的类"></a>三.在中间件中添加log的类</h2><pre><code>class LoggingMiddleware(MiddlewareMixin):
-
-    def process_request(self, request):
-        # 初始化时间
-        request.init_time = time.time()
-
-    def process_response(self, request, response):
-        try:# 请求到响应之间消耗时长
-            count_times = time.time() - request.init_time
-            # 请求的地址和请求方式
-            path = request.path
-            method = request.method
-            # 响应的状态码
-            status = response.status_code
-            content = response.content
-            # 日志记录的信息
-            message = &apos;%s %s %s %s %s &apos; % (path, method, status, content, count_times)
-            logger.info(message)
-        except Exception as e:
-            logger.critical(&apos;log error: %s&apos; % e)
-
-        return response
-</code></pre><h2 id="四-最后在setting-py文件中添加log的中间件"><a href="#四-最后在setting-py文件中添加log的中间件" class="headerlink" title="四.最后在setting.py文件中添加log的中间件"></a>四.最后在setting.py文件中添加log的中间件</h2><p><img src="https://i.imgur.com/Q2KFch8.png" alt=""></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/10/Log/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Decorator" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/09/Decorator/">Django中的装饰器</a>
-    </h1>
-  
-
-        
-        <a href="/2019/01/09/Decorator/" class="archive-article-date">
-  	<time datetime="2019-01-08T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.什么是装饰器?</p>
-<p>所谓装饰器,就是把可以函数包装装饰,为函数添加一些其他的功能,而装饰器的参数是需要包装的函数的函数变量.</p>
-<p>装饰器如下:</p>
-<pre><code>def outer_login(func):
-    def inner_login(request):
-        if request.session.get(&apos;user_id&apos;):
-            return func(request)    # index函数
-        else:
-            return HttpResponseRedirect(reverse(&apos;user:my_login&apos;))
-    return inner_login
-</code></pre><p>使用装饰器装饰函数:</p>
-<pre><code>@outer_login
-def hindex(request):
-    if request.method == &apos;GET&apos;:
-        return render(request,&apos;index.html&apos;)
-</code></pre><p>首先,在django中,一般在views.py对函数进行声明,而函数都有固定的request参数.所以我们参数不需要传参,而是固定的request参数.</p>
-<p>下面我们来理解装饰器的装饰过程:</p>
-<p>1.调用函数hindex()时,实际将函数变量hindx传参给outer1函数<br>所以可以理解为:</p>
-<pre><code>hindex() = outer1(hindex)()
-</code></pre><p>2.这里调用了hindex函数,返回值为inner这个函数变量<br>所以式子变为:</p>
-<pre><code>hindex() = inner()
-</code></pre><p>3.调用inner函数,获取附加的功能,返回值时,执行func(request),<br>因为我们第一步已经将index传给func参数<br>所以</p>
-<pre><code>hindex() = func() = hindex()
-</code></pre><p>4.hindex的返回值返回到inner函数中,最后通过inner函数返回.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/01/09/Decorator/">展开全文 >></a>
         </p>
       
 

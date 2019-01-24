@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: Flask | Duke&#39;s Blog</title>
+  <title>Flask的模型和数据库的增删改查 | Duke&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Duke&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/Flask/index.html">
+  <meta name="description" content="一.Flask的模型安装Flask-SQLAlchemy  pip install sqlalchemy (1)在models.py中定义:db = SQLAlchemy() (2)在manage.py中:app.config[&amp;apos;SQLALCHEMY_DATABASE_URI&amp;apos;] = &amp;apos;mysql+pymysql://root:123456@127.0.0.1:330">
+<meta name="keywords" content="Flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask的模型和数据库的增删改查">
+<meta property="og:url" content="http://yoursite.com/2019/01/24/Flask模型和数据库的增删改查/index.html">
 <meta property="og:site_name" content="Duke&#39;s Blog">
+<meta property="og:description" content="一.Flask的模型安装Flask-SQLAlchemy  pip install sqlalchemy (1)在models.py中定义:db = SQLAlchemy() (2)在manage.py中:app.config[&amp;apos;SQLALCHEMY_DATABASE_URI&amp;apos;] = &amp;apos;mysql+pymysql://root:123456@127.0.0.1:330">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-24T09:54:26.949Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Duke&#39;s Blog">
+<meta name="twitter:title" content="Flask的模型和数据库的增删改查">
+<meta name="twitter:description" content="一.Flask的模型安装Flask-SQLAlchemy  pip install sqlalchemy (1)在models.py中定义:db = SQLAlchemy() (2)在manage.py中:app.config[&amp;apos;SQLALCHEMY_DATABASE_URI&amp;apos;] = &amp;apos;mysql+pymysql://root:123456@127.0.0.1:330">
   
     <link rel="alternative" href="/atom.xml" title="Duke&#39;s Blog" type="application/atom+xml">
   
@@ -150,36 +155,133 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Flask模型和数据库的增删改查" class="article article-type-post " itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Flask的模型和数据库的增删改查
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/24/Flask关联模型/" class="archive-article-date">
+
+        
+        <a href="/2019/01/24/Flask模型和数据库的增删改查/" class="archive-article-date">
   	<time datetime="2019-01-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-24</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/24/Flask关联模型/">Flask关联模型</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-Flask的模型"><a href="#一-Flask的模型" class="headerlink" title="一.Flask的模型"></a>一.Flask的模型</h2><pre><code>安装Flask-SQLAlchemy
 
-        <div class="article-info info-on-right">
-          
+pip install sqlalchemy
+</code></pre><h3 id="1-在models-py中定义"><a href="#1-在models-py中定义" class="headerlink" title="(1)在models.py中定义:"></a>(1)在models.py中定义:</h3><pre><code>db = SQLAlchemy()
+</code></pre><h3 id="2-在manage-py中"><a href="#2-在manage-py中" class="headerlink" title="(2)在manage.py中:"></a>(2)在manage.py中:</h3><pre><code>app.config[&apos;SQLALCHEMY_DATABASE_URI&apos;] = &apos;mysql+pymysql://root:123456@127.0.0.1:3306/flask8&apos;
+app.config[&apos;SQLALCHEMY_TRACK_MODIFICATIONS&apos;] = False
+db.init_app(app)    
+</code></pre><h2 id="二-Flask数据库的增删改查"><a href="#二-Flask数据库的增删改查" class="headerlink" title="二.Flask数据库的增删改查:"></a>二.Flask数据库的增删改查:</h2><h3 id="1-增"><a href="#1-增" class="headerlink" title="1.增"></a>1.增</h3><pre><code>增加学生信息
+db.session.add(stu)
+sb.session.commit()
+批量增加学生信息
+db.session.add_all(stus)
+db.session.commit()
+</code></pre><h3 id="2-删"><a href="#2-删" class="headerlink" title="2.删"></a>2.删</h3><pre><code>db.session.delete(stu)
+db.session.commit()
+</code></pre><h3 id="3-改"><a href="#3-改" class="headerlink" title="3.改"></a>3.改</h3><pre><code>db.session.add(stu) : 更新内容可以不写
+db.session.commit()
+</code></pre><h3 id="4-查"><a href="#4-查" class="headerlink" title="4.查"></a>4.查</h3><pre><code>三种查询主键的方式:
+Student.query.filter(Student.id == 1).first()
+stu = Student.query.filter_by(id=1).first()
+stu = Student.query.get(1)
+
+查询第一个对象:
+stu1 = Student.query.all()[0]
+stu2 = Student.query.first()
+</code></pre><h3 id="1-排序"><a href="#1-排序" class="headerlink" title="(1)排序"></a>(1)排序</h3><pre><code>order_by(&apos;-id&apos;) :表示安装id的降序排数据
+order_by(&apos;id&apos;) :表示安装id的升序排数据
+</code></pre><h3 id="2-分页"><a href="#2-分页" class="headerlink" title="(2)分页"></a>(2)分页</h3><pre><code>方法1(切片):
+stus = Student.query.all()[:4]
+方法2:
+offset(m).limit(n):表示跳过m个参数,截取n个参数
+</code></pre><h3 id="3-比较符号"><a href="#3-比较符号" class="headerlink" title="(3)比较符号"></a>(3)比较符号</h3><pre><code>gt ge lt le : 大于 大于等于 小于 小于等于
+stus = Student.query.filter(Student.s_age.__gt__(30)).all()
+
+第二种(直接使用&gt; &lt; &gt;= &lt;= ):
+stus = Student.query.filter(Student.s_age &gt; 30).all()
+</code></pre><h3 id="4-模糊查询"><a href="#4-模糊查询" class="headerlink" title="(4)模糊查询"></a>(4)模糊查询</h3><pre><code>包含查询:
+stus = Student.query.filter(Student.s_name.contains(&apos;d&apos;)).all()
+
+以什么开头:
+stus = Student.query.filter(Student.s_name.startswith(&apos;p&apos;)).all()
+
+以什么结尾:
+stus = Student.query.filter(Student.s_name.endswith(&apos;e&apos;)).all()
+
+模糊查询(&apos;_&apos; 匹配一位,&apos;%&apos; 匹配任意长度的数据):
+stus = Student.query.filter(Student.s_name.like(&apos;__a%&apos;)).all()
+</code></pre><h3 id="5-多条件查询"><a href="#5-多条件查询" class="headerlink" title="(5)多条件查询"></a>(5)多条件查询</h3><pre><code>且:
+    1.链式结构查询:
+    stus = Student.query.filter(Student.s_name.contains(&apos;e&apos;)).filter(Student.s_age &gt; 35).all()
+
+    2._and方法或者,号隔开
+    stus = Student.query.filter(and_(Student.s_name.contains(&apos;e&apos;), Student.s_age &gt; 35)).all()
+    stus = Student.query.filter(Student.s_name.contains(&apos;e&apos;), Student.s_age &gt; 35).all()
+或:
+    or_方法:
+    stus = Student.query.filter(or_(Student.s_name.contains(&apos;e&apos;), Student.s_age &gt; 35)).all()
+
+非:
+    not_方法:
+    stus = Student.query.filter( not_(Student.s_name.contains(&apos;e&apos;) )).all()
+</code></pre><h3 id="6-分页"><a href="#6-分页" class="headerlink" title="(6)分页"></a>(6)分页</h3><pre><code>第一种方法(切片):
+
+第二种方法(limit offset):
+
+第三种方法(paginate):
+    has_prev/has_next 是否有上一页/下一页
+
+    prev_num/next_num 上一页/下一页 的页码
+
+    page:当前页码 pages:总页数
+
+    循环取页码 iter_pages()
+</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,247 +293,115 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/01/24/Flask模型和数据库的增删改查/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/24/Flask模型和数据库的增删改查/" class="archive-article-date">
-  	<time datetime="2019-01-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-24</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/01/24/Flask关联模型/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Flask关联模型
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/22/Flask(安装-管理-蓝图)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Flask(安装-蓝图)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/24/Flask模型和数据库的增删改查/">Flask的模型和数据库的增删改查</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/22/Flask(安装-管理-蓝图)/" class="archive-article-date">
-  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/22/Flask(安装-管理-蓝图)/">Flask(安装-蓝图)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/22/Flask(路由-请求响应)/" class="archive-article-date">
-  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/22/Flask(路由-请求响应)/">Flask(路由-请求响应)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/22/Flask-login(具体功能实现)/" class="archive-article-date">
-  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/22/Flask-login(具体功能实现)/">Flask-login</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/22/session的使用/" class="archive-article-date">
-  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/22/session的使用/">session的使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/22/装饰器/" class="archive-article-date">
-  	<time datetime="2019-01-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/22/装饰器/">装饰器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Flask</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -454,9 +424,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

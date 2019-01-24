@@ -152,6 +152,169 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-redis" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/27/redis/">Redis基础</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/27/redis/" class="archive-article-date">
+  	<time datetime="2018-12-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-linux操作redis"><a href="#一-linux操作redis" class="headerlink" title="一.linux操作redis"></a>一.linux操作redis</h3><p>redis-server 前台运行redis ctrl + z :放置在后台 但是停止状态<br>redis-server &amp; 后台运行redis<br>jobs - 查看后台进程.<br>bg %1 恢复后台进程.<br>fg %1 恢复前台运行<br>netstat -nap | grep 端口号 查看端口进程号<br>kill 进程号 : 杀死进程<br>kill -9 进程号: 强杀进程(一般不适用)</p>
+<p>查询指令信息:</p>
+<ol>
+<li>man  指令</li>
+<li>指令 –help </li>
+<li>info 指令:q</li>
+</ol>
+<h3 id="二-Redis-发展进程"><a href="#二-Redis-发展进程" class="headerlink" title="二.Redis: 发展进程"></a>二.Redis: 发展进程</h3><p>lloogg.com</p>
+<p>Github,Twitter,YouTube</p>
+<p>提供高速缓存服务 - 缓存热点数据()<br>缓解了数据库的压力(高频访问数据不用直接访问数据库)</p>
+<p>Redis提供两种数据持久化的方案</p>
+<ul>
+<li>RDB </li>
+<li>ADF </li>
+</ul>
+<h3 id="三-Redis-操作指令"><a href="#三-Redis-操作指令" class="headerlink" title="三.Redis 操作指令:"></a>三.Redis 操作指令:</h3><p>auth            – 验证身份 (输入密码)<br>ping            –心跳事件<br>set username duke (ex time 添加超时时间) 设置key和值<br>get             –查看键<br>del             –删除键<br>expire          :设置超时时间<br>keys *          :查看所有的键<br>exist           : 查看key是否存在.<br>flushdb         : 删除当前库的所有键<br>flushall        : 清除所有库的所有键<br>select (0-15)   : 切换数据库,默认16库<br>save /bgsave    - 保存数据/后台保存数据<br>quit            : 退出<br>dbsize          : 查看当前库有多少键值对</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/27/redis/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-css" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/22/css/">css选择器</a>
+    </h1>
+  
+
+        
+        <a href="/2018/12/22/css/" class="archive-article-date">
+  	<time datetime="2018-12-21T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">伪类选择器:</span><br><span class="line">	a:link</span><br><span class="line">	a:hover(鼠标悬停)</span><br><span class="line">	a:active(鼠标长按)</span><br><span class="line">	a:visited(访问一次之后)</span><br><span class="line">选择器:</span><br><span class="line">	标签选择器 p&#123;&#125;</span><br><span class="line">	id选择器  id&#123;&#125;</span><br><span class="line">	class选择器 class属性值&#123;&#125;</span><br><span class="line">	群组选择器</span><br><span class="line">	子类选择器</span><br><span class="line">	通配符 *&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">css学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/12/22/css/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-display" class="article article-type-post  article-index" itemscope="" itemprop="blogPost">
   <div class="article-inner">
     
